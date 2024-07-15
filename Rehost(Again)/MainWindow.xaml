@@ -57,10 +57,10 @@
             <Grid Name="toolboxGrid" Grid.Column="0"/>
             <Grid Name="designerGrid" Grid.Column="1"/>
             <Grid Name="propertyGrid" Grid.Column="2"/>
-            <DockPanel  Name ="Content" Grid.Column="1" HorizontalAlignment="Left" Height="295" LastChildFill="False" Margin="45,85,0,0" VerticalAlignment="Top" Width="454"/>
+            <DockPanel  Name ="Content" Grid.Column="1" HorizontalAlignment="Left" Height="639" LastChildFill="False" Margin="28,0,0,0" VerticalAlignment="Center" Width="717"/>
         </Grid>
 
     </DockPanel>
-    
+
 
 </Window>

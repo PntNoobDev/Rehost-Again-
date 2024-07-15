@@ -20,7 +20,7 @@ using System.Activities.Presentation.Toolbox;
 using System.Activities.Statements;
 using System.ComponentModel;
 using System.Data.SqlTypes;
-using System.Activities.Statements;
+
 
 namespace Rehost_Again_
 {
@@ -74,14 +74,23 @@ namespace Rehost_Again_
             var tool2 = new ToolboxItemWrapper("System.Activities.Statements.Sequence",
                 typeof(Sequence).Assembly.FullName, null, "Sequence");
 
-            var tool3 = new ToolboxItemWrapper("System.Activities.Statements.Sequence",
+            var tool3 = new ToolboxItemWrapper("System.Activities.Statemen" +
+                "" + "ts.Sequence",
                typeof(Sequence).Assembly.FullName, null, "Sequence");
+
+
+            var tool4 = new ToolboxItemWrapper("System.Activities.Statements.Sequence",
+               typeof(Sequence).Assembly.FullName, null, "Sequence");
+
+            var tool5 = new ToolboxItemWrapper("System.Activities.Statements.WriteLine",
+               typeof(WriteLine).Assembly.FullName, null, "WriteLine");
 
             // Add the Toolbox items to the category.
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
-
+            category.Add(tool4);
+            category.Add(tool5);
             // Add the category to the ToolBox control.
             ctrl.Categories.Add(category);
             return ctrl;
