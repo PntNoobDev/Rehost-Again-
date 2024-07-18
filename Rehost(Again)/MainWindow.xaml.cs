@@ -85,12 +85,15 @@ namespace Rehost_Again_
             var tool5 = new ToolboxItemWrapper("System.Activities.Statements.WriteLine",
                typeof(WriteLine).Assembly.FullName, null, "WriteLine");
 
+       
+
             // Add the Toolbox items to the category.
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
             category.Add(tool4);
             category.Add(tool5);
+           
             // Add the category to the ToolBox control.
             ctrl.Categories.Add(category);
             return ctrl;
