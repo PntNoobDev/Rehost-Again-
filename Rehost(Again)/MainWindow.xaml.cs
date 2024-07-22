@@ -8,6 +8,7 @@ using System.Activities.Statements;
 using System.Activities.Core.Presentation;
 using System.Activities.Hosting;
 using System.Activities.Presentation.Services;
+using Microsoft.VisualBasic.Activities;
 
 namespace Rehost_Again_
 {
@@ -37,12 +38,24 @@ namespace Rehost_Again_
             wd = new WorkflowDesigner();
             designerGrid.Children.Add(wd.View);
 
-            // Load a simple Sequence activity to ensure we have a valid workflow
+            // Load a simple Sequence activity with While and Delay to ensure we have a valid workflow
             wd.Load(new Sequence
             {
                 Activities =
                 {
-                    new WriteLine { Text = "Hello, Workflow!" }
+                    new WriteLine { Text = "Starting Workflow..." },
+                    new While
+                    {
+                        Condition = new VisualBasicValue<bool>("True"),
+                        Body = new Sequence
+                        {
+                            Activities =
+                            {
+                                new WriteLine { Text = "Inside While loop" },
+                                new Delay { Duration = new TimeSpan(0, 0, 5) } // Trì hoãn 5 giây
+                            }
+                        }
+                    }
                 }
             });
 
