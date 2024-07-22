@@ -66,10 +66,16 @@ namespace Rehost_Again_
                 typeof(Sequence).Assembly.FullName, null, "Sequence");
             var tool3 = new ToolboxItemWrapper("System.Activities.Statements.WriteLine",
                 typeof(WriteLine).Assembly.FullName, null, "WriteLine");
+            var tool4 = new ToolboxItemWrapper("System.Activities.Statements.While",
+                typeof(While).Assembly.FullName, null, "While");
+            var tool5 = new ToolboxItemWrapper("System.Activities.Statements.Delay",
+                typeof(Delay).Assembly.FullName, null, "Delay");
 
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
+            category.Add(tool4);
+            category.Add(tool5);
 
             ctrl.Categories.Add(category);
             return ctrl;
@@ -79,13 +85,13 @@ namespace Rehost_Again_
         {
             ToolboxControl tc = GetToolboxControl();
             Grid.SetColumn(tc, 0);
-            grid1.Children.Add(tc);
+            toolboxGrid.Children.Add(tc);
         }
 
         private void AddPropertyInspector()
         {
             Grid.SetColumn(wd.PropertyInspectorView, 2);
-            grid1.Children.Add(wd.PropertyInspectorView);
+            propertyGrid.Children.Add(wd.PropertyInspectorView);
         }
 
         private void Wd_ModelChanged(object sender, EventArgs e)
@@ -133,11 +139,6 @@ namespace Rehost_Again_
                 isWorkflowRunning = false;
                 UpdateUI();
             }
-        }
-
-        private void btnRunWorkflow_Click(object sender, RoutedEventArgs e)
-        {
-            RunWorkflow();
         }
 
         private void RunWorkflow()
