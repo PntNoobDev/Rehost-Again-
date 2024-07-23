@@ -9,6 +9,8 @@ using System.Activities.Core.Presentation;
 using System.Activities.Hosting;
 using System.Activities.Presentation.Services;
 using Microsoft.VisualBasic.Activities;
+using System.Activities.Presentation.Metadata;
+using System.ComponentModel;
 
 namespace Rehost_Again_
 {
@@ -66,6 +68,13 @@ namespace Rehost_Again_
         {
             var dm = new DesignerMetadata();
             dm.Register();
+
+            // Đăng ký activity tùy chỉnh và designer của nó
+            AttributeTableBuilder builder = new AttributeTableBuilder();
+            builder.AddCustomAttributes(
+                typeof(CustomActivity),
+                new DesignerAttribute(typeof(CustomActivityDesigner)));
+            MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
         private ToolboxControl GetToolboxControl()
@@ -83,12 +92,15 @@ namespace Rehost_Again_
                 typeof(While).Assembly.FullName, null, "While");
             var tool5 = new ToolboxItemWrapper("System.Activities.Statements.Delay",
                 typeof(Delay).Assembly.FullName, null, "Delay");
+            var tool6 = new ToolboxItemWrapper("Rehost_Again_.CustomActivity",
+                typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
 
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
             category.Add(tool4);
             category.Add(tool5);
+            category.Add(tool6);
 
             ctrl.Categories.Add(category);
             return ctrl;
@@ -156,84 +168,37 @@ namespace Rehost_Again_
 
         private void RunWorkflow()
         {
-            if (wd != null && wfApp == null)
+            if (isWorkflowRunning)
+                return;
+
+            if (wd != null)
             {
                 var activity = wd.Context.Services.GetService<ModelService>().Root.GetCurrentValue() as Activity;
-
                 if (activity != null)
                 {
                     wfApp = new WorkflowApplication(activity);
 
                     wfApp.Completed += WfApp_Completed;
                     wfApp.Aborted += WfApp_Aborted;
-                    wfApp.OnUnhandledException += WfApp_OnUnhandledException;
-
-                    wfApp.Extensions.Add(new TextWriterExtension(txtOutput));
-
-                    wfApp.Run();
 
                     isWorkflowRunning = true;
                     UpdateUI();
-                }
-                else
-                {
-                    MessageBox.Show("The workflow definition is null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    wfApp.Run();
                 }
             }
         }
 
         private void WfApp_Completed(WorkflowApplicationCompletedEventArgs obj)
         {
-            Dispatcher.Invoke(() =>
-            {
-                isWorkflowRunning = false;
-                UpdateUI();
-            });
+            isWorkflowRunning = false;
+            UpdateUI();
         }
 
         private void WfApp_Aborted(WorkflowApplicationAbortedEventArgs obj)
         {
-            Dispatcher.Invoke(() =>
-            {
-                isWorkflowRunning = false;
-                UpdateUI();
-            });
-        }
-
-        private UnhandledExceptionAction WfApp_OnUnhandledException(WorkflowApplicationUnhandledExceptionEventArgs arg)
-        {
-            MessageBox.Show($"Unhandled exception: {arg.UnhandledException.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return UnhandledExceptionAction.Terminate;
-        }
-
-        private class TextWriterExtension : System.IO.TextWriter
-        {
-            private readonly TextBox output;
-
-            public TextWriterExtension(TextBox output)
-            {
-                this.output = output;
-            }
-
-            public override void Write(char value)
-            {
-                output.Dispatcher.Invoke(() =>
-                {
-                    output.AppendText(value.ToString());
-                    output.ScrollToEnd();
-                });
-            }
-
-            public override void WriteLine(string value)
-            {
-                output.Dispatcher.Invoke(() =>
-                {
-                    output.AppendText(value + Environment.NewLine);
-                    output.ScrollToEnd();
-                });
-            }
-
-            public override System.Text.Encoding Encoding => System.Text.Encoding.UTF8;
+            isWorkflowRunning = false;
+            UpdateUI();
         }
     }
 }
