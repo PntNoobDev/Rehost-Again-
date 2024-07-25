@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Activities;
+using System.Activities.Statements;
+using System.Activities.Presentation;
+using System.Activities.Presentation.Metadata;
+using System.Activities.Presentation.Toolbox;
+using System.Activities.Presentation.Services;
 using System.Windows;
 using System.Windows.Controls;
-using System.Activities;
-using System.Activities.Presentation;
-using System.Activities.Presentation.Toolbox;
-using System.Activities.Statements;
-using System.Activities.Core.Presentation;
-using System.Activities.Hosting;
-using System.Activities.Presentation.Services;
+using System.IO;
+using System.Text;
 using Microsoft.VisualBasic.Activities;
-using System.Activities.Presentation.Metadata;
+using System.Activities.Core.Presentation;
 using System.ComponentModel;
 
 namespace Rehost_Again_
@@ -19,6 +20,7 @@ namespace Rehost_Again_
         private WorkflowDesigner wd;
         private WorkflowApplication wfApp;
         private bool isWorkflowRunning = false;
+        private Action<string> appendTextAction;
 
         public MainWindow()
         {
@@ -27,12 +29,19 @@ namespace Rehost_Again_
             AddDesigner();
             AddToolBox();
             AddPropertyInspector();
-            Loaded += MainWindow_Loaded;
+
+            // Initialize appendTextAction
+            appendTextAction = text => Dispatcher.Invoke(() =>
+            {
+                txtOutput.AppendText(text);
+                txtOutput.ScrollToEnd();
+            });
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Handle the Loaded event here if needed
+            // Run a simple workflow when the application starts
+            RunInitialWorkflow();
         }
 
         private void AddDesigner()
@@ -54,7 +63,7 @@ namespace Rehost_Again_
                             Activities =
                             {
                                 new WriteLine { Text = "Inside While loop" },
-                                new Delay { Duration = new TimeSpan(0, 0, 5) } // Trì hoãn 5 giây
+                                new Delay { Duration = new TimeSpan(0, 0, 5) } // Delay 5 seconds
                             }
                         }
                     }
@@ -69,7 +78,7 @@ namespace Rehost_Again_
             var dm = new DesignerMetadata();
             dm.Register();
 
-            // Đăng ký activity tùy chỉnh và designer của nó
+            // Register custom activity and its designer
             AttributeTableBuilder builder = new AttributeTableBuilder();
             builder.AddCustomAttributes(
                 typeof(CustomActivity),
@@ -94,7 +103,6 @@ namespace Rehost_Again_
                 typeof(Delay).Assembly.FullName, null, "Delay");
             var tool6 = new ToolboxItemWrapper("Rehost_Again_.CustomActivity",
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
-
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
@@ -176,7 +184,13 @@ namespace Rehost_Again_
                 var activity = wd.Context.Services.GetService<ModelService>().Root.GetCurrentValue() as Activity;
                 if (activity != null)
                 {
+                    var textWriter = new WorkflowTextWriter(appendTextAction);
+
+                    // Create WorkflowApplication
                     wfApp = new WorkflowApplication(activity);
+
+                    // Add extension
+                    wfApp.Extensions.Add(textWriter);
 
                     wfApp.Completed += WfApp_Completed;
                     wfApp.Aborted += WfApp_Aborted;
@@ -187,6 +201,36 @@ namespace Rehost_Again_
                     wfApp.Run();
                 }
             }
+        }
+
+        private void RunInitialWorkflow()
+        {
+            var initialWorkflow = new Sequence
+            {
+                Activities =
+                {
+                    new WriteLine { Text = "Application Started: Workflow is running..." },
+                    new Delay { Duration = TimeSpan.FromSeconds(2) }, // Delay for 2 seconds
+                    new WriteLine { Text = "Workflow Completed Successfully!" }
+                }
+            };
+
+            wfApp = new WorkflowApplication(initialWorkflow);
+
+            // Add a custom text writer for initial workflow
+            var textWriter = new WorkflowTextWriter(appendTextAction);
+            wfApp.Extensions.Add(textWriter);
+
+            wfApp.Completed += (args) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    txtOutput.AppendText("Initial workflow has completed.\n");
+                    txtOutput.ScrollToEnd();
+                });
+            };
+
+            wfApp.Run();
         }
 
         private void WfApp_Completed(WorkflowApplicationCompletedEventArgs obj)
@@ -200,5 +244,27 @@ namespace Rehost_Again_
             isWorkflowRunning = false;
             UpdateUI();
         }
+    }
+
+    public class WorkflowTextWriter : TextWriter
+    {
+        private readonly Action<string> _appendTextAction;
+
+        public WorkflowTextWriter(Action<string> appendTextAction)
+        {
+            _appendTextAction = appendTextAction;
+        }
+
+        public override void Write(char value)
+        {
+            _appendTextAction(value.ToString());
+        }
+
+        public override void Write(string value)
+        {
+            _appendTextAction(value);
+        }
+
+        public override Encoding Encoding => Encoding.UTF8;
     }
 }

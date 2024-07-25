@@ -2,11 +2,41 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
-    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" 
+    Height="220" Width="220">
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Custom Activity Designer" />
-            <sap:WorkflowItemPresenter Item="{Binding Path=ModelItem.Input}" HintText="Drop an activity here" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- TextBlock for custom activity name -->
+        <StackPanel Margin="0,0,10,0">
+            <TextBlock><Run Text="Custom Activity Designer"/><LineBreak/><Run/></TextBlock>
         </StackPanel>
+
+        <!-- Border and TextBlock for input -->
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,23,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="27" Width="166">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="inputTextBlock" Text="Input" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+                <Button Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" Height="20" Grid.Column="1" Click="InputButton_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Border and TextBlock for output -->
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,55,0,0" HorizontalAlignment="Left" Width="166">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="outputTextBlock" Text="Output" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+                <Button Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" Height="20" Grid.Column="1" Click="OutputButton_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </sap:ActivityDesigner>
