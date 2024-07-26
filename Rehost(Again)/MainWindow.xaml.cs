@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.VisualBasic.Activities;
 using System.Activities.Core.Presentation;
 using System.ComponentModel;
+using PdfiumViewer;
 
 namespace Rehost_Again_
 {
@@ -29,6 +30,7 @@ namespace Rehost_Again_
             AddDesigner();
             AddToolBox();
             AddPropertyInspector();
+            RegisterMetadata1();
 
             // Initialize appendTextAction
             appendTextAction = text => Dispatcher.Invoke(() =>
@@ -86,6 +88,21 @@ namespace Rehost_Again_
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
+        private void RegisterMetadata1()
+        {
+            var dm = new DesignerMetadata();
+            dm.Register();
+
+            // Register custom activity and its designer
+            AttributeTableBuilder builder = new AttributeTableBuilder();
+            builder.AddCustomAttributes(
+                typeof(ReadPdfActivity),
+                new DesignerAttribute(typeof(ReadPdfActivityDesigner))
+            );
+            MetadataStore.AddAttributeTable(builder.CreateTable());
+        }
+
+
         private ToolboxControl GetToolboxControl()
         {
             var ctrl = new ToolboxControl();
@@ -103,12 +120,16 @@ namespace Rehost_Again_
                 typeof(Delay).Assembly.FullName, null, "Delay");
             var tool6 = new ToolboxItemWrapper("Rehost_Again_.CustomActivity",
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
+            var tool7 = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
+                typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
+
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
             category.Add(tool4);
             category.Add(tool5);
             category.Add(tool6);
+            category.Add(tool7);
 
             ctrl.Categories.Add(category);
             return ctrl;

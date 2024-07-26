@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rehost_Again_"
-        xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
         mc:Ignorable="d"
         Title="ReHost" Height="800" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
         Loaded="MainWindow_Loaded">
@@ -25,20 +24,22 @@
 
         <Grid Name="grid1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
             <!-- Toolbox -->
-            <Grid Name="toolboxGrid" Grid.Column="0"/>
+            <Grid Name="toolboxGrid" Grid.Column="0" Background="LightGray"/>
 
             <!-- Designer Canvas -->
             <Grid Name="designerGrid" Grid.Column="1" Margin="0,0,0,164"/>
 
             <!-- Property Inspector -->
-            <Grid Name="propertyGrid" Grid.Column="2"/>
+            <Grid Name="propertyGrid" Grid.Column="2" Background="LightGray"/>
 
+            <!-- PDFViewer -->
+         
             <!-- Output panel -->
             <DockPanel Grid.Column="1" VerticalAlignment="Bottom" Height="164">
                 <TabControl x:Name="tabControlOutput">
