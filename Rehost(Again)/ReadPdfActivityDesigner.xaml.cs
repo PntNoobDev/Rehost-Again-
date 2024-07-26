@@ -1,9 +1,11 @@
 ﻿using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Controls;
+using System.Activities.Presentation;
+
 namespace Rehost_Again_
 {
-    public partial class ReadPdfActivityDesigner : UserControl
+    public partial class ReadPdfActivityDesigner : ActivityDesigner
     {
         public ReadPdfActivityDesigner()
         {
