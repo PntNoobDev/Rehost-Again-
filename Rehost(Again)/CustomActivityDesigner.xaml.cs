@@ -1,9 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using System.Activities;
 using System.Activities.Presentation;
-using System.Activities.Presentation.Metadata;
 using System.Windows;
-using System.Windows.Forms;
-using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using Microsoft.Win32;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace Rehost_Again_
 {
@@ -18,26 +17,28 @@ namespace Rehost_Again_
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "All files (*.*)|*.*"
+                Filter = "Rar,Zip,Raz (*.Rar,*.Zip,*.Raz)|*.Rar;*.Zip;*.Raz"
             };
 
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 inputTextBlock.Text = openFileDialog.FileName;
+                // Đặt giá trị cho ModelItem
+                ModelItem.Properties["InputFilePath"].SetValue(new InArgument<string>(openFileDialog.FileName));
             }
         }
 
         private void OutputButton_Click(object sender, RoutedEventArgs e)
         {
-            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            using (var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog())
             {
                 if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     outputTextBlock.Text = folderBrowserDialog.SelectedPath;
+                    // Đặt giá trị cho ModelItem
+                    ModelItem.Properties["OutputFolderPath"].SetValue(new InArgument<string>(folderBrowserDialog.SelectedPath));
                 }
             }
         }
     }
 }
-
-

@@ -39,7 +39,11 @@
             <Grid Name="propertyGrid" Grid.Column="2" Background="LightGray"/>
 
             <!-- PDFViewer -->
-         
+            <DockPanel Grid.Column="1" VerticalAlignment="Top" Height="100" LastChildFill="False">
+                <Label Content="PDF File Path:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox x:Name="pdfFilePathTextBox" IsReadOnly="True" VerticalAlignment="Center" Margin="5" Width="400"/>
+            </DockPanel>
+
             <!-- Output panel -->
             <DockPanel Grid.Column="1" VerticalAlignment="Bottom" Height="164">
                 <TabControl x:Name="tabControlOutput">

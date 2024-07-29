@@ -1,7 +1,8 @@
-﻿using System.Windows;
-using Microsoft.Win32;
-using System.Windows.Controls;
+﻿using System.Activities;
 using System.Activities.Presentation;
+using System.Activities.Presentation.Model;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Rehost_Again_
 {
@@ -14,14 +15,15 @@ namespace Rehost_Again_
 
         private void SelectPdfFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "PDF Files (*.pdf)|*.pdf",
-                Title = "Select a PDF File"
-            };
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "PDF Files (*.pdf)|*.pdf";
 
             if (openFileDialog.ShowDialog() == true)
             {
+                // Đặt giá trị cho ModelItem
+                ModelItem.Properties["PdfFilePath"].SetValue(new InArgument<string>(openFileDialog.FileName));
+
+                // Hiển thị đường dẫn file PDF trong TextBox
                 PdfFilePathTextBox.Text = openFileDialog.FileName;
             }
         }

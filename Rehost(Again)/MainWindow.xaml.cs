@@ -12,7 +12,6 @@ using System.Text;
 using Microsoft.VisualBasic.Activities;
 using System.Activities.Core.Presentation;
 using System.ComponentModel;
-using PdfiumViewer;
 
 namespace Rehost_Again_
 {
@@ -232,26 +231,16 @@ namespace Rehost_Again_
                 {
                     new WriteLine { Text = "Application Started: Workflow is running..." },
                     new Delay { Duration = TimeSpan.FromSeconds(2) }, // Delay for 2 seconds
-                    new WriteLine { Text = "Workflow Completed Successfully!" }
+                    new WriteLine { Text = "Initial workflow completed." }
                 }
             };
 
-            wfApp = new WorkflowApplication(initialWorkflow);
-
-            // Add a custom text writer for initial workflow
             var textWriter = new WorkflowTextWriter(appendTextAction);
-            wfApp.Extensions.Add(textWriter);
 
-            wfApp.Completed += (args) =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    txtOutput.AppendText("Initial workflow has completed.\n");
-                    txtOutput.ScrollToEnd();
-                });
-            };
+            var initialWfApp = new WorkflowApplication(initialWorkflow);
+            initialWfApp.Extensions.Add(textWriter);
 
-            wfApp.Run();
+            initialWfApp.Run();
         }
 
         private void WfApp_Completed(WorkflowApplicationCompletedEventArgs obj)
@@ -269,23 +258,23 @@ namespace Rehost_Again_
 
     public class WorkflowTextWriter : TextWriter
     {
-        private readonly Action<string> _appendTextAction;
+        private readonly Action<string> appendTextAction;
 
         public WorkflowTextWriter(Action<string> appendTextAction)
         {
-            _appendTextAction = appendTextAction;
+            this.appendTextAction = appendTextAction;
         }
+
+        public override Encoding Encoding => Encoding.UTF8;
 
         public override void Write(char value)
         {
-            _appendTextAction(value.ToString());
+            appendTextAction(value.ToString());
         }
 
         public override void Write(string value)
         {
-            _appendTextAction(value);
+            appendTextAction(value);
         }
-
-        public override Encoding Encoding => Encoding.UTF8;
     }
 }
