@@ -30,6 +30,7 @@ namespace Rehost_Again_
             AddToolBox();
             AddPropertyInspector();
             RegisterMetadata1();
+            RegisterMetadata2();
 
             // Initialize appendTextAction
             appendTextAction = text => Dispatcher.Invoke(() =>
@@ -133,7 +134,7 @@ namespace Rehost_Again_
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
             var tool7 = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
                 typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
-            var tool8 = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
+            var smtp = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
         typeof(SmtpActivity).Assembly.FullName, null, "SmtpActivity");
 
             category.Add(tool1);
@@ -143,7 +144,7 @@ namespace Rehost_Again_
             category.Add(tool5);
             category.Add(tool6); 
             category.Add(tool7);
-            category.Add(tool8);
+            category.Add(smtp);
 
             ctrl.Categories.Add(category);
             return ctrl;

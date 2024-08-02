@@ -1,0 +1,70 @@
+﻿<sap:ActivityDesigner x:Class="Rehost_Again_.SmtpActivityDesigner"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+                      xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:local="clr-namespace:Rehost_Again_"
+                      mc:Ignorable="d" Height="416" Width="468">
+    <sap:ActivityDesigner.Resources>
+        <local:ModelPropertyToModelItemConverter x:Key="ModelPropertyToModelItemConverter"/>
+    </sap:ActivityDesigner.Resources>
+    <Grid Height="224">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="59.2"/>
+            <RowDefinition Height="Auto" MinHeight="74.4"/>
+        </Grid.RowDefinitions>
+
+        <!-- To Field -->
+        <Border BorderBrush="DarkGray"
+                BorderThickness="1"
+                Background="LightGray"
+                Margin="5,5,5,20"
+                Padding="5"
+                Grid.Row="0">
+            <StackPanel>
+                <TextBlock Text="To"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           Foreground="Black"/>
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[To].Value, Mode=OneWay}"
+                                        Margin="0,0,0,5"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Subject Field -->
+        <Border BorderBrush="DarkGray"
+                BorderThickness="1"
+                Background="LightGray"
+                Margin="5,62,6,25"
+                Padding="5" Grid.RowSpan="2">
+            <StackPanel>
+                <TextBlock Text="Subject"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           Foreground="Black" Height="18"/>
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Subject].Value, Mode=OneWay}"
+                                        Margin="0,0,0,5"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Body Field -->
+        <Border BorderBrush="DarkGray"
+                BorderThickness="1"
+                Background="LightGray"
+                Margin="5,41,5,-22"
+                Padding="5"
+                Grid.Row="1" Grid.RowSpan="2">
+            <StackPanel>
+                <TextBlock Text="Body"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           Foreground="Black"/>
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Body].Value, Mode=OneWay}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</sap:ActivityDesigner>

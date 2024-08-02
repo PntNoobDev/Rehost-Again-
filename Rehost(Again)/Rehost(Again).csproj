@@ -248,13 +248,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModelPropertyToModelItemConverter.cs" />
     <Compile Include="ReadPdfActivity.cs" />
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
       <DependentUpon>ReadPdfActivityDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="SMTP activity.cs" />
-    <Compile Include="SMTP mail.xaml.cs">
-      <DependentUpon>SMTP mail.xaml</DependentUpon>
+    <Compile Include="SmtpActivityDesigner.xaml.cs">
+      <DependentUpon>SmtpActivityDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="SmtpSecurityMode.cs" />
     <Page Include="CustomActivityDesigner.xaml">
@@ -281,7 +282,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SMTP mail.xaml">
+    <Page Include="SmtpActivityDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
