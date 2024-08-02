@@ -100,6 +100,18 @@ namespace Rehost_Again_
             );
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
+        private void RegisterMetadata2()
+        {
+            var dm = new DesignerMetadata();
+            dm.Register();
+
+            // Register custom activity and its designer
+            AttributeTableBuilder builder = new AttributeTableBuilder();
+            builder.AddCustomAttributes(
+                typeof(SmtpActivity),
+                new DesignerAttribute(typeof(SmtpActivityDesigner)));
+            MetadataStore.AddAttributeTable(builder.CreateTable());
+        }
 
 
         private ToolboxControl GetToolboxControl()
@@ -121,14 +133,17 @@ namespace Rehost_Again_
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
             var tool7 = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
                 typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
+            var tool8 = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
+        typeof(SmtpActivity).Assembly.FullName, null, "SmtpActivity");
 
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
             category.Add(tool4);
             category.Add(tool5);
-            category.Add(tool6);
+            category.Add(tool6); 
             category.Add(tool7);
+            category.Add(tool8);
 
             ctrl.Categories.Add(category);
             return ctrl;

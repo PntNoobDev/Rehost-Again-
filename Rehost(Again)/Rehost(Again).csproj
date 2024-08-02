@@ -252,6 +252,11 @@
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
       <DependentUpon>ReadPdfActivityDesigner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SMTP activity.cs" />
+    <Compile Include="SMTP mail.xaml.cs">
+      <DependentUpon>SMTP mail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SmtpSecurityMode.cs" />
     <Page Include="CustomActivityDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,6 +278,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ReadPdfActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SMTP mail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
