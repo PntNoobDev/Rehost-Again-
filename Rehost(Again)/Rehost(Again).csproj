@@ -248,6 +248,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ForeachActivity.cs" />
+    <Compile Include="ForeachActivityDesigner.xaml.cs">
+      <DependentUpon>ForeachActivityDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForeachActivityDesignerAttribute.cs" />
     <Compile Include="ModelPropertyToModelItemConverter.cs" />
     <Compile Include="ReadPdfActivity.cs" />
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
@@ -258,7 +263,12 @@
       <DependentUpon>SmtpActivityDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="SmtpSecurityMode.cs" />
+    <Compile Include="TypeConverter.cs" />
     <Page Include="CustomActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForeachActivityDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
