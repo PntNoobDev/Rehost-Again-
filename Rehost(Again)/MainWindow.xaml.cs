@@ -229,7 +229,10 @@ namespace Rehost_Again_
                 UpdateUI();
             }
         }
-
+        private string GetCurrentDateTime()
+        {
+            return DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+        }
         private void RunWorkflow()
         {
             if (isWorkflowRunning)
@@ -240,10 +243,19 @@ namespace Rehost_Again_
                 var activity = wd.Context.Services.GetService<ModelService>().Root.GetCurrentValue() as Activity;
                 if (activity != null)
                 {
+                    var sequence = new Sequence
+                    {
+                        Activities =
+                        {
+                            new WriteLine { Text = "Start Workflow at " + GetCurrentDateTime() },
+                            activity // Add the current workflow as an activity in the sequence
+                        }
+                    };
+
                     var textWriter = new WorkflowTextWriter(appendTextAction);
 
                     // Create WorkflowApplication
-                    wfApp = new WorkflowApplication(activity);
+                    wfApp = new WorkflowApplication(sequence);
 
                     // Add extension
                     wfApp.Extensions.Add(textWriter);
@@ -258,7 +270,6 @@ namespace Rehost_Again_
                 }
             }
         }
-
         private void RunInitialWorkflow()
         {
             var initialWorkflow = new Sequence
