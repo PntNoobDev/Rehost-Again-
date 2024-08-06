@@ -9,9 +9,10 @@ namespace Rehost_Again_
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var property = value as ModelProperty;
-            return property?.Value;
+            var modelProperty = value as ModelProperty;
+            return modelProperty?.ComputedValue;
         }
+
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

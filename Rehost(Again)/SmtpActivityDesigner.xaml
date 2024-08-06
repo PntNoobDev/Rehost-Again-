@@ -6,22 +6,19 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:local="clr-namespace:Rehost_Again_"
-                      mc:Ignorable="d" Height="510" Width="497">
-    <sap:ActivityDesigner.Resources>
-        <local:ModelPropertyToModelItemConverter x:Key="ModelPropertyToModelItemConverter"/>
-    </sap:ActivityDesigner.Resources>
+                      mc:Ignorable="d" Height="447" Width="490">
     <Grid Height="224">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="59.2"/>
+            <RowDefinition Height="Auto" MinHeight="74.4"/>
         </Grid.RowDefinitions>
 
         <!-- To Field -->
         <Border BorderBrush="DarkGray"
                 BorderThickness="1"
                 Background="LightGray"
-                Margin="5,5,5,48"
+                Margin="5,5,5,20"
                 Padding="5"
                 Grid.Row="0">
             <StackPanel>
@@ -29,8 +26,9 @@
                            FontWeight="Bold"
                            FontSize="14"
                            Foreground="Black"/>
-                <TextBox x:Name="ToTextBox"
-                         Margin="0,0,0,5"/>
+                <sapv:ExpressionTextBox x:Name="ToTextBox"
+                                        Expression="{Binding Path=ModelItem.Properties.To, Mode=TwoWay}"
+                                        Margin="0,0,0,5"/>
             </StackPanel>
         </Border>
 
@@ -38,15 +36,16 @@
         <Border BorderBrush="DarkGray"
                 BorderThickness="1"
                 Background="LightGray"
-                Margin="5,76,6,11"
+                Margin="5,68,6,19"
                 Padding="5" Grid.RowSpan="2">
             <StackPanel>
                 <TextBlock Text="Subject"
                            FontWeight="Bold"
                            FontSize="14"
                            Foreground="Black" Height="18"/>
-                <TextBox x:Name="SubjectTextBox"
-                         Margin="0,0,0,5"/>
+                <sapv:ExpressionTextBox x:Name="SubjectTextBox"
+                                        Expression="{Binding Path=ModelItem.Properties.Subject, Mode=TwoWay}"
+                                        Margin="0,0,0,5"/>
             </StackPanel>
         </Border>
 
@@ -54,7 +53,7 @@
         <Border BorderBrush="DarkGray"
                 BorderThickness="1"
                 Background="LightGray"
-                Margin="5,41,5,-41"
+                Margin="5,57,5,-38"
                 Padding="5"
                 Grid.Row="1" Grid.RowSpan="2">
             <StackPanel>
@@ -62,7 +61,8 @@
                            FontWeight="Bold"
                            FontSize="14"
                            Foreground="Black"/>
-                <TextBox x:Name="BodyTextBox"/>
+                <sapv:ExpressionTextBox x:Name="BodyTextBox"
+                                        Expression="{Binding Path=ModelItem.Properties.Body, Mode=TwoWay}"/>
             </StackPanel>
         </Border>
     </Grid>
