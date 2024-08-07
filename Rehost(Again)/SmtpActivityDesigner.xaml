@@ -3,10 +3,16 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
                       xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+                      xmlns:Converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+                      xmlns:c="clr-namespace:Rehost_Again_"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:local="clr-namespace:Rehost_Again_"
                       mc:Ignorable="d" Height="447" Width="490">
+    <sap:ActivityDesigner.Resources>
+        <Converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+        <c:ModelPropertyToModelItemConverter x:Key="ModelPropertyToModelItemConverter" />
+    </sap:ActivityDesigner.Resources>
     <Grid Height="224">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,8 +32,8 @@
                            FontWeight="Bold"
                            FontSize="14"
                            Foreground="Black"/>
-                <sapv:ExpressionTextBox x:Name="ToTextBox"
-                                        Expression="{Binding Path=ModelItem.Properties.To, Mode=TwoWay}"
+                <sapv:ExpressionTextBox x:Name="ToTextBox" OwnerActivity="{Binding Path=ModelItem}"
+                                        Expression="{Binding Path=ModelItem.To,Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                         Margin="0,0,0,5"/>
             </StackPanel>
         </Border>
