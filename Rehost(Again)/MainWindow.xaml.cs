@@ -138,20 +138,28 @@ namespace Rehost_Again_
 
             var tool1 = new ToolboxItemWrapper("System.Activities.Statements.Assign",
                 typeof(Assign).Assembly.FullName, null, "Assign");
+
             var tool2 = new ToolboxItemWrapper("System.Activities.Statements.Sequence",
                 typeof(Sequence).Assembly.FullName, null, "Sequence");
+
             var tool3 = new ToolboxItemWrapper("System.Activities.Statements.WriteLine",
                 typeof(WriteLine).Assembly.FullName, null, "WriteLine");
+
             var tool4 = new ToolboxItemWrapper("System.Activities.Statements.While",
                 typeof(While).Assembly.FullName, null, "While");
+
             var tool5 = new ToolboxItemWrapper("System.Activities.Statements.Delay",
                 typeof(Delay).Assembly.FullName, null, "Delay");
-            var tool6 = new ToolboxItemWrapper("Rehost_Again_.CustomActivity",
+
+            var tool6 = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
-            var tool7 = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
-                typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
-            var tool8 = new ToolboxItemWrapper("Rehost_Again_.ForeachActivity`1",
+
+            var readpdf = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
+         typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
+
+            var Foreach = new ToolboxItemWrapper("Rehost_Again_.ForeachActivity`1",
         typeof(ForeachActivity<object>).Assembly.FullName, null, "ForeachActivity");
+
             var smtp = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
         typeof(SmtpActivity).Assembly.FullName, null, "SmtpActivity");
 
@@ -161,8 +169,8 @@ namespace Rehost_Again_
             category.Add(tool4);
             category.Add(tool5);
             category.Add(tool6); 
-            category.Add(tool7);
-            category.Add(tool8);
+            category.Add(readpdf);
+            category.Add(Foreach);
             category.Add(smtp);
 
             ctrl.Categories.Add(category);

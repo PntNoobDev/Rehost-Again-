@@ -1,8 +1,11 @@
-﻿using System.Activities;
+﻿using System;
+using System.Activities;
 using System.Activities.Presentation;
 using System.Activities.Presentation.Model;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Rehost_Again_
 {
@@ -11,7 +14,10 @@ namespace Rehost_Again_
         public ReadPdfActivityDesigner()
         {
             InitializeComponent();
+           
         }
+
+        
 
         private void SelectPdfFile_Click(object sender, RoutedEventArgs e)
         {

@@ -9,6 +9,14 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:local="clr-namespace:Rehost_Again_"
                       mc:Ignorable="d" Height="447" Width="490">
+
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/icons8-email-64.png"/>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
     <sap:ActivityDesigner.Resources>
         <Converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
         <c:ModelPropertyToModelItemConverter x:Key="ModelPropertyToModelItemConverter" />
@@ -42,7 +50,7 @@
         <Border BorderBrush="DarkGray"
                 BorderThickness="1"
                 Background="LightGray"
-                Margin="5,68,6,19"
+                Margin="5,72,6,15"
                 Padding="5" Grid.RowSpan="2">
             <StackPanel>
                 <TextBlock Text="Subject"

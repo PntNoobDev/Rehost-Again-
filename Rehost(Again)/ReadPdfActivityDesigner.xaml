@@ -5,8 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
              xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" 
+            xmlns:local="clr-namespace:Rehost_Again_"
              mc:Ignorable="d"
+              
              d:DesignHeight="300" d:DesignWidth="400">
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/pdf.png"/>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
+
+
     <Grid>
         <TextBlock Text="Read PDF Activity Designer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,36,0,0" Background="White" Height="36" Width="186"/>
         <Button Content="Select PDF File" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,31,0,0" Width="120" Click="SelectPdfFile_Click" Height="46"/>

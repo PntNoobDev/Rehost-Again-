@@ -5,11 +5,19 @@
                       xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      mc:Ignorable="d"
-                      Height="589" Width="808">
+                      mc:Ignorable= "d"
+                      Height="1046" Width="1030">
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/icons8-repeat-30.png"/>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
 
-    <Grid Height="525">
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,7 +39,7 @@
                            FontSize="14"
                            Foreground="Black"
                            VerticalAlignment="Center"/>
-                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Values], Mode=OneWay}"
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Values].Value, Mode=OneWay}"
                                         Margin="5,0,0,0"
                                         VerticalAlignment="Center"/>
             </StackPanel>
@@ -45,7 +53,7 @@
                            FontSize="14"
                            Foreground="Black"
                            VerticalAlignment="Center"/>
-                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Item], Mode=OneWay}"
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[Item].Value, Mode=OneWay}"
                                         Margin="5,0,0,0"
                                         VerticalAlignment="Center"/>
             </StackPanel>
@@ -59,13 +67,22 @@
                            FontSize="14"
                            Foreground="Black"
                            VerticalAlignment="Center"/>
-                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[ConditionDescription], Mode=OneWay}"
+                <sapv:ExpressionTextBox Expression="{Binding Path=ModelItem.Properties[ConditionDescription].Value, Mode=OneWay}"
                                         Margin="5,0,0,0"
                                         VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
-        <!-- Workflow Item Presenter -->
-        <sap:WorkflowItemPresenter Item="{Binding Path=ModelItem.Body}" Grid.Row="3" Margin="0,10,0,161"/>
+        <!-- Body Field -->
+        <StackPanel Grid.Row="4" Margin="5">
+            <TextBlock Text="Body:"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       Foreground="Black"
+                       VerticalAlignment="Center"/>
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="5,5,5,5" Padding="5" Height="153">
+                <sap:WorkflowItemPresenter Item="{Binding Path=ModelItem.Properties[Body].Value}" Margin="0,10,0,10"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </sap:ActivityDesigner>
