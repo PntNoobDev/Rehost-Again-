@@ -263,6 +263,7 @@
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
       <DependentUpon>ReadPdfActivityDesigner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="resfinder.cs" />
     <Compile Include="SMTP activity.cs" />
     <Compile Include="SmtpActivityDesigner.xaml.cs">
       <DependentUpon>SmtpActivityDesigner.xaml</DependentUpon>
@@ -336,9 +337,15 @@
     <Resource Include="icons8-stop-102.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-repeat-30.png" />
-    <Resource Include="Resources\pdf.png" />
-    <Resource Include="Resources\icons8-email-64.png" />
+    <Resource Include="Resources\icons8-repeat-30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <EmbeddedResource Include="Resources\pdf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Resources\icons8-email-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="x86\pdfium.dll" />
   </ItemGroup>
   <ItemGroup />

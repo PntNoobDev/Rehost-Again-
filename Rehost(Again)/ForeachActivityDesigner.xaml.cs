@@ -7,6 +7,7 @@ namespace Rehost_Again_
 {
     public partial class ForeachActivityDesigner : ActivityDesigner
     {
+
         public ForeachActivityDesigner()
         {
             InitializeComponent();

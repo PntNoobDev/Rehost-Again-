@@ -6,13 +6,14 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       mc:Ignorable= "d"
+                      
                       Height="1046" Width="1030">
     <sap:ActivityDesigner.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
                 <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/icons8-repeat-30.png"/>
             </DrawingBrush.Drawing>
-        </DrawingBrush>
+        </DrawingBrush> 
     </sap:ActivityDesigner.Icon>
 
     <Grid>

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Activities;
+﻿using System.Activities;
 using System.Activities.Presentation;
-using System.Activities.Presentation.Model;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Rehost_Again_
 {
+    [ToolboxBitmap(typeof(resfinder), "/Resources/pdf.png")]
     public partial class ReadPdfActivityDesigner : ActivityDesigner
     {
         public ReadPdfActivityDesigner()
         {
             InitializeComponent();
-           
         }
-
-        
 
         private void SelectPdfFile_Click(object sender, RoutedEventArgs e)
         {

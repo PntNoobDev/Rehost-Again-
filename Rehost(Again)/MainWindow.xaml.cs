@@ -12,6 +12,8 @@ using System.Text;
 using Microsoft.VisualBasic.Activities;
 using System.Activities.Core.Presentation;
 using System.ComponentModel;
+using System.Drawing;
+using System.Workflow.ComponentModel.Design;
 
 namespace Rehost_Again_
 {
@@ -93,14 +95,15 @@ namespace Rehost_Again_
             var dm = new DesignerMetadata();
             dm.Register();
 
-            // Register custom activity and its designer
             AttributeTableBuilder builder = new AttributeTableBuilder();
             builder.AddCustomAttributes(
                 typeof(ReadPdfActivity),
+                new ToolboxBitmapAttribute(typeof(ReadPdfActivity), "./Resources/pdf.png"),
                 new DesignerAttribute(typeof(ReadPdfActivityDesigner))
             );
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
+
         private void RegisterMetadata2()
         {
             var dm = new DesignerMetadata();
@@ -155,7 +158,7 @@ namespace Rehost_Again_
                 typeof(CustomActivity).Assembly.FullName, null, "CustomActivity");
 
             var readpdf = new ToolboxItemWrapper("Rehost_Again_.ReadPdfActivity",
-         typeof(ReadPdfActivity).Assembly.FullName, null, "ReadPdfActivity");
+      typeof(ReadPdfActivity).Assembly.FullName, typeof(ReadPdfActivityDesigner).Assembly.FullName, "ReadPdfActivity");
 
             var Foreach = new ToolboxItemWrapper("Rehost_Again_.ForeachActivity`1",
         typeof(ForeachActivity<object>).Assembly.FullName, null, "ForeachActivity");

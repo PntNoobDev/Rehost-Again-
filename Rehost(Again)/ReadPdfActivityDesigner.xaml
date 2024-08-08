@@ -7,7 +7,6 @@
              xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" 
             xmlns:local="clr-namespace:Rehost_Again_"
              mc:Ignorable="d"
-              
              d:DesignHeight="300" d:DesignWidth="400">
     <sap:ActivityDesigner.Icon>
         <DrawingBrush>
