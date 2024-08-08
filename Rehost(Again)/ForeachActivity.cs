@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Activities;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Rehost_Again_
 {
+    [ToolboxBitmap(typeof(resfinder), "Resources.foreach.png")]
+
+
+
     public sealed class ForeachActivity<T> : NativeActivity
     {
         [RequiredArgument]

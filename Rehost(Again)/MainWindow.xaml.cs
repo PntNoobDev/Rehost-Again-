@@ -97,8 +97,7 @@ namespace Rehost_Again_
 
             AttributeTableBuilder builder = new AttributeTableBuilder();
             builder.AddCustomAttributes(
-                typeof(ReadPdfActivity),
-                new ToolboxBitmapAttribute(typeof(ReadPdfActivity), "./Resources/pdf.png"),
+                typeof(ReadPdfActivity),            
                 new DesignerAttribute(typeof(ReadPdfActivityDesigner))
             );
             MetadataStore.AddAttributeTable(builder.CreateTable());
@@ -109,11 +108,11 @@ namespace Rehost_Again_
             var dm = new DesignerMetadata();
             dm.Register();
 
-            // Register custom activity and its designer
             AttributeTableBuilder builder = new AttributeTableBuilder();
             builder.AddCustomAttributes(
                 typeof(SmtpActivity),
-                new DesignerAttribute(typeof(SmtpActivityDesigner)));
+                new DesignerAttribute(typeof(SmtpActivityDesigner))
+            );
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
         private void RegisterMetadata3()
@@ -161,10 +160,10 @@ namespace Rehost_Again_
       typeof(ReadPdfActivity).Assembly.FullName, typeof(ReadPdfActivityDesigner).Assembly.FullName, "ReadPdfActivity");
 
             var Foreach = new ToolboxItemWrapper("Rehost_Again_.ForeachActivity`1",
-        typeof(ForeachActivity<object>).Assembly.FullName, null, "ForeachActivity");
+        typeof(ForeachActivity<object>).Assembly.FullName, typeof(ForeachActivityDesigner).Assembly.FullName, "ForeachActivity");
 
             var smtp = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
-        typeof(SmtpActivity).Assembly.FullName, null, "SmtpActivity");
+        typeof(SmtpActivity).Assembly.FullName, typeof(SmtpActivityDesigner).Assembly.FullName, "SmtpActivity");
 
             category.Add(tool1);
             category.Add(tool2);

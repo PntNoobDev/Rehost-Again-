@@ -11,7 +11,7 @@
     <sap:ActivityDesigner.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/pdf.png"/>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/activities/pdf.png"/>
             </DrawingBrush.Drawing>
         </DrawingBrush>
     </sap:ActivityDesigner.Icon>

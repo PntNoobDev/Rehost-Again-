@@ -2,10 +2,13 @@
 using System.Activities;
 using System.Activities.Tracking;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Markup;
 
 namespace Rehost_Again_
 {
+    [ToolboxBitmap(typeof(resfinder), "Resources.smtp.png")]
+
     [ContentProperty("Body")]
     public class SmtpActivity : CodeActivity
     {

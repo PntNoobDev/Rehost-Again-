@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Activities;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using iTextSharp.text.pdf;
@@ -7,11 +8,12 @@ using iTextSharp.text.pdf.parser;
 
 namespace Rehost_Again_
 {
+    [ToolboxBitmap(typeof(resfinder),"Resources.pdf.png")]
     public class ReadPdfActivity : CodeActivity<string>
     {
         [RequiredArgument]
         public InArgument<string> PdfFilePath { get; set; }
-  
+        
         protected override string Execute(CodeActivityContext context)
         {
             var filePath = PdfFilePath.Get(context);

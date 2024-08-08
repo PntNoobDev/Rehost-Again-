@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Rehost_Again_
 {
-    [ToolboxBitmap(typeof(resfinder), "/Resources/pdf.png")]
+   
     public partial class ReadPdfActivityDesigner : ActivityDesigner
     {
         public ReadPdfActivityDesigner()

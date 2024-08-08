@@ -13,7 +13,5 @@ namespace Rehost_Again_
             InitializeComponent();
            
         }
-
-       
     }
 }

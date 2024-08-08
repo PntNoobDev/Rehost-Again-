@@ -13,7 +13,7 @@
     <sap:ActivityDesigner.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/icons8-email-64.png"/>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/activities/smtp.png"/>
             </DrawingBrush.Drawing>
         </DrawingBrush>
     </sap:ActivityDesigner.Icon>

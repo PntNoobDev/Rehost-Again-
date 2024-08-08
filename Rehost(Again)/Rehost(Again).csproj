@@ -257,7 +257,6 @@
     <Compile Include="ForeachActivityDesigner.xaml.cs">
       <DependentUpon>ForeachActivityDesigner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ForeachActivityDesignerAttribute.cs" />
     <Compile Include="ModelPropertyToModelItemConverter.cs" />
     <Compile Include="ReadPdfActivity.cs" />
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
@@ -337,13 +336,22 @@
     <Resource Include="icons8-stop-102.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-repeat-30.png">
+    <EmbeddedResource Include="Resources\foreach.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\pdf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Resource Include="Resources\icons8-email-64.png">
+    <EmbeddedResource Include="Resources\smtp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Resources\activities\pdf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\activities\smtp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\activities\foreach.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Content Include="x86\pdfium.dll" />
