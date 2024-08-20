@@ -1,0 +1,177 @@
+﻿<sap:ActivityDesigner x:Class="Rehost_Again_.HttpRequestDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="1081" Width="784">
+
+    <Grid>
+        <!-- Initial Interface (Image 1) -->
+        <Grid x:Name="InitialView" Visibility="Visible">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="HTTP Request" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Import" Width="100" Margin="0,0,10,0"/>
+                    <Button Content="Configure" Width="100" Click="Configure_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- Detailed Interface (Image 2) -->
+        <Grid x:Name="DetailedView" Visibility="Collapsed">
+            <Grid Margin="10,0,10,0" Height="860">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Request Builder Section -->
+                <TabControl Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,0">
+                    <!-- Adjust tab control margin -->
+                    <TabItem Header="Request Builder">
+                        <StackPanel Margin="6,0,6,0" Height="860" RenderTransformOrigin="0.51,0.432">
+                            <!-- Adjust stack panel margin and height -->
+
+                            <!-- End Point -->
+                            <TextBlock Text="End point:" Margin="0,0,0,5"/>
+                            <TextBox Name="EndPointTextBox" Width="640"/>
+
+                            <!-- Preview URL -->
+                            <TextBlock Text="Preview URL:" Margin="10,10,0,5"/>
+                            <TextBox Name="PreviewUrlTextBox" Width="640"/>
+
+                            <!-- Enable SSL certificate verification -->
+                            <CheckBox Content="Enable SSL certificate verification" Margin="10,10,0,5"/>
+
+                            <!-- Timeout -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Timeout:" VerticalAlignment="Center"/>
+                                <TextBox Name="TimeoutTextBox" Width="120" Margin="5,0,0,0"/>
+                            </StackPanel>
+
+                            <!-- Client Certificate -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Client Certificate:" VerticalAlignment="Center"/>
+                                <TextBox Name="ClientCertificateTextBox" Width="220" Margin="5,0,0,0"/>
+                                <TextBlock Text="Client Certificate Password:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <PasswordBox Name="ClientCertificatePasswordBox" Width="220"/>
+                            </StackPanel>
+
+                            <!-- Request Method -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Request Method:" VerticalAlignment="Center"/>
+                                <ComboBox Width="150" Margin="5,0,0,0">
+                                    <!-- Adjust combo box width -->
+                                    <ComboBoxItem Content="GET" IsSelected="True"/>
+                                    <ComboBoxItem Content="POST"/>
+                                    <ComboBoxItem Content="PUT"/>
+                                    <ComboBoxItem Content="DELETE"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <!-- Accept Response As -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Accept response as:" VerticalAlignment="Center"/>
+                                <ComboBox Width="150" Margin="5,0,0,0">
+                                    <!-- Adjust combo box width -->
+                                    <ComboBoxItem Content="ANY" IsSelected="True"/>
+                                    <ComboBoxItem Content="JSON"/>
+                                    <ComboBoxItem Content="XML"/>
+                                    <ComboBoxItem Content="CUSTOM"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <!-- Parameters -->
+                            <Expander Header="Parameters" Margin="10,10,0,5">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <!-- Buttons -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Add Parameter" Width="120" Margin="5" Click="AddParameter_Click"/>
+                                        <Button Content="Add Header" Width="120" Margin="5" Click="AddHeader_Click"/>
+                                        <Button Content="Add URL" Width="120" Margin="5" Click="AddUrl_Click"/>
+                                        <Button Content="Delete" Width="120" Margin="5" IsEnabled="False"/>
+                                    </StackPanel>
+
+                                    <!-- Input Fields -->
+                                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                        <!-- Name, File Path, Type on the same row -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                                            <!-- Name -->
+                                            <Grid Margin="5,0">
+                                                <TextBox x:Name="NameTextBox" Width="120" Margin="0,0,5,0"/>
+                                                <TextBlock Text="Name" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                            </Grid>
+                                            <!-- File Path -->
+                                            <Grid Margin="5,0">
+                                                <TextBox x:Name="FilePathTextBox" Width="120" Margin="0,0,5,0"/>
+                                                <TextBlock Text="File Path" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                            </Grid>
+                                            <!-- Type -->
+                                            <Grid Margin="5,0">
+                                                <ComboBox x:Name="TypeComboBox" Width="120"/>
+                                                <TextBlock Text="Type" IsHitTestVisible="True" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Attachments -->
+                            <Expander Header="Attachments" Margin="10,10,0,5">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <!-- Buttons -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                        <Button Content="Add Attachment" Width="120" Margin="5" IsEnabled="True"/>
+                                        <Button Content="Delete Attachment" Width="120" Margin="5" IsEnabled="True"/>
+                                    </StackPanel>
+
+                                    <!-- Input Fields -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <!-- Name -->
+                                        <Grid Margin="5,0">
+                                            <TextBox x:Name="NameTextBox2" Width="120" Margin="0,0,5,0"/>
+                                            <TextBlock Text="Name" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                        </Grid>
+                                        <!-- File Path -->
+                                        <Grid Margin="5,0">
+                                            <TextBox x:Name="FilePathText" Width="120" Margin="0,0,5,0"/>
+                                            <TextBlock Text="File Path" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                        </Grid>
+                                        <!-- Type -->
+                                        <Grid Margin="5,0">
+                                            <ComboBox x:Name="TypeComboBox1" Width="120">
+                                                <ComboBoxItem Content="Attachment" IsSelected="True"/>
+                                            </ComboBox>
+                                            <TextBlock Text="Type" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,-16,5,0" Foreground="Gray"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- Authentication -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Authentication:" VerticalAlignment="Center"/>
+                                <ComboBox Width="150" Margin="5,0,0,0">
+                                    <!-- Adjust combo box width -->
+                                    <ComboBoxItem Content="None" IsSelected="True"/>
+                                    <ComboBoxItem Content="Basic Auth"/>
+                                    <ComboBoxItem Content="OAuth"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <!-- Buttons Preview and OK -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,0,5">
+                                <Button Content="Preview" Width="100" Margin="0,0,10,0"/>
+                                <Button Content="OK" Width="100"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</sap:ActivityDesigner>

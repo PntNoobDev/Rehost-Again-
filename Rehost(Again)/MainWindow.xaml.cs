@@ -34,6 +34,7 @@ namespace Rehost_Again_
             RegisterMetadata1();
             RegisterMetadata2();
             RegisterMetadata3();
+            RegisterMetadata4();
             // Initialize appendTextAction
             appendTextAction = text => Dispatcher.Invoke(() =>
             {
@@ -131,6 +132,19 @@ namespace Rehost_Again_
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
+        private void RegisterMetadata4()
+        {
+            var dm = new DesignerMetadata();
+            dm.Register();
+
+            AttributeTableBuilder builder = new AttributeTableBuilder();
+            builder.AddCustomAttributes(
+                typeof(HttpRequestActivity),
+                new DesignerAttribute(typeof(HttpRequestDesigner))
+            );
+            MetadataStore.AddAttributeTable(builder.CreateTable());
+        }
+
 
 
         private ToolboxControl GetToolboxControl()
@@ -165,6 +179,11 @@ namespace Rehost_Again_
             var smtp = new ToolboxItemWrapper("Rehost_Again_.SmtpActivity",
         typeof(SmtpActivity).Assembly.FullName, typeof(SmtpActivityDesigner).Assembly.FullName, "SmtpActivity");
 
+            var httpRequest = new ToolboxItemWrapper("Rehost_Again_.HttpRequestActivity",
+    typeof(HttpRequestActivity).Assembly.FullName, typeof(HttpRequestDesigner).Assembly.FullName, "HttpRequestActivity");
+
+            category.Add(httpRequest);
+
             category.Add(tool1);
             category.Add(tool2);
             category.Add(tool3);
@@ -174,7 +193,7 @@ namespace Rehost_Again_
             category.Add(readpdf);
             category.Add(Foreach);
             category.Add(smtp);
-
+            category.Add(httpRequest);
             ctrl.Categories.Add(category);
             return ctrl;
         }

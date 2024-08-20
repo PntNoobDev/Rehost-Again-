@@ -257,6 +257,10 @@
     <Compile Include="ForeachActivityDesigner.xaml.cs">
       <DependentUpon>ForeachActivityDesigner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HttpRequestActivity.cs" />
+    <Compile Include="HttpRequestDesigner.xaml.cs">
+      <DependentUpon>HttpRequestDesigner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModelPropertyToModelItemConverter.cs" />
     <Compile Include="ReadPdfActivity.cs" />
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ForeachActivityDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HttpRequestDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
