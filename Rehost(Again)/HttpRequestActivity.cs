@@ -18,6 +18,7 @@ namespace Rehost_Again_
         public InArgument<string> ClientCertificatePassword { get; set; }
         public InArgument<bool> EnableSSLVerification { get; set; }
 
+        public InArgument<bool> Preview { get; set; }
         protected override void Execute(CodeActivityContext context)
         {
             var endpoint = Endpoint.Get(context);

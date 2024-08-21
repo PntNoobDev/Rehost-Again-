@@ -32,29 +32,29 @@ namespace Rehost_Again_
         }
         private void AddParameter_Click(object sender, RoutedEventArgs e)
         {
-            // Cập nhật TextBlocks và ComboBox để hiển thị "GetOrPost"
+           /* // Cập nhật TextBlocks và ComboBox để hiển thị "GetOrPost"
             NameTextBox.Text = string.Empty;
             FilePathTextBox.Text = string.Empty;
             TypeComboBox.ItemsSource = new List<string> { "GetOrPost" };
-            TypeComboBox.SelectedIndex = 0;
+            TypeComboBox.SelectedIndex = 0;*/
         }
 
         private void AddHeader_Click(object sender, RoutedEventArgs e)
         {
-            // Cập nhật TextBlocks và ComboBox để hiển thị "Http Header"
+          /*  // Cập nhật TextBlocks và ComboBox để hiển thị "Http Header"
             NameTextBox.Text = string.Empty;
             FilePathTextBox.Text = string.Empty;
             TypeComboBox.ItemsSource = new List<string> { "Http Header" };
-            TypeComboBox.SelectedIndex = 0;
+            TypeComboBox.SelectedIndex = 0;*/
         }
 
         private void AddUrl_Click(object sender, RoutedEventArgs e)
         {
-            // Cập nhật TextBlocks và ComboBox để hiển thị "UrlSegment"
+          /*  // Cập nhật TextBlocks và ComboBox để hiển thị "UrlSegment"
             NameTextBox.Text = string.Empty;
             FilePathTextBox.Text = string.Empty;
             TypeComboBox.ItemsSource = new List<string> { "UrlSegment" };
-            TypeComboBox.SelectedIndex = 0;
+            TypeComboBox.SelectedIndex = 0;*/
         }
 
     }

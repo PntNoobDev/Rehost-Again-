@@ -253,6 +253,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="ForeachActivity.cs" />
     <Compile Include="ForeachActivityDesigner.xaml.cs">
       <DependentUpon>ForeachActivityDesigner.xaml</DependentUpon>
