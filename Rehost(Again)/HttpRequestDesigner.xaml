@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Rehost_Again_"
     xmlns:local1="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
-    Height="1081" Width="784">
+    Height="1268" Width="852">
 
     <sap:ActivityDesigner.Resources>
         <!-- Khai báo các converter trong phần tài nguyên -->
@@ -14,9 +14,9 @@
         <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </sap:ActivityDesigner.Resources>
 
-    <Grid>
+    <Grid Height="1021">
         <!-- Initial Interface -->
-        <Grid x:Name="InitialView" Visibility="Visible">
+        <Grid x:Name="InitialView" Visibility="Visible" Margin="10,0,0,0" Height="1001" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="HTTP Request" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -46,26 +46,26 @@
                             <TextBlock Text="End point:" Margin="0,0,0,5"/>
                             <sapv:ExpressionTextBox x:Name="EndPointTextBox"
                                 OwnerActivity="{Binding Path=ModelItem}"
-                                Expression="{Binding Path=ModelItem.EndPoint, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
+                                Expression="{Binding Path=ModelItem.Endpoint, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                 Width="640"/>
 
                             <!-- Preview URL -->
                             <TextBlock Text="Preview URL:" Margin="10,10,0,5"/>
                             <sapv:ExpressionTextBox x:Name="PreviewUrlTextBox"
                                 OwnerActivity="{Binding Path=ModelItem}"
-                                Expression="{Binding Path=ModelItem.PreviewUrl, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
+                                Expression="{Binding Path=ModelItem.Preview, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                 Width="640"/>
 
                             <!-- Enable SSL certificate verification -->
                             <CheckBox Content="Enable SSL certificate verification" Margin="10,10,0,5"
-                                IsChecked="{Binding Path=ModelItem.EnableSslVerification, Mode=TwoWay}"/>
+                                IsEnabled="{Binding Path=ModelItem.EnableSSLVerification, Mode=TwoWay}"/>
 
                             <!-- Timeout -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
                                 <TextBlock Text="Timeout:" VerticalAlignment="Center"/>
                                 <sapv:ExpressionTextBox x:Name="TimeoutTextBox"
                                     OwnerActivity="{Binding Path=ModelItem}"
-                                    Expression="{Binding Path=ModelItem.Timeout, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
+                                    Expression="{Binding Path=ModelItem.TimeOut, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                     Width="120" Margin="5,0,0,0"/>
                             </StackPanel>
 
@@ -77,7 +77,7 @@
                                     Expression="{Binding Path=ModelItem.ClientCertificate, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                     Width="220" Margin="5,0,0,0"/>
                                 <TextBlock Text="Client Certificate Password:" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <PasswordBox x:Name="ClientCertificatePasswordBox" Width="220"/>
+                                <PasswordBox x:Name="ClientCertificatePassword" Width="220"/>
                             </StackPanel>
 
                             <!-- Request Method -->
@@ -145,9 +145,55 @@
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
+
+                            <!-- Attach -->
+                            <Expander Header="Attachments" Margin="10,10,0,5">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <!-- Add Attachment Button -->
+                                    <Button Content="Add Attachment" Width="150" Margin="5" Click="AddAttachment_Click"/>
+                                    <Button Content="Delete Attachment" Width="150" Margin="5" Click="DeleteAttachment_Click"/>
+                                    <!-- Attachment List -->
+                                    <ListBox x:Name="AttachmentListBox" Height="100" Margin="5">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=FileName}" Margin="0,0,5,0"/>
+                                                    <Button Content="Remove" Width="75" Command="{Binding Path=DataContext.RemoveAttachmentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                            </Expander>
+
+
+                            <!-- Authentication -->
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
+                                <TextBlock Text="Authentication:" VerticalAlignment="Center"/>
+                                <ComboBox Width="150" Margin="5,0,0,0">
+                                    <!-- Adjust combo box width -->
+                                    <ComboBoxItem Content="None" IsSelected="True"/>
+                                    <ComboBoxItem Content="Basic Auth"/>
+                                    <ComboBoxItem Content="OAuth"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <!-- Buttons Preview and OK -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,0,5">
+                                <Button Content="Preview" Width="100" Margin="0,0,10,0"/>
+                                <Button Content="OK" Width="100"/>
+                            </StackPanel>
                         </StackPanel>
                     </TabItem>
+
+                    <TabItem Header="Request Preview">
+                        <!-- Nội dung xem trước yêu cầu -->
+                        <TextBlock Text="Preview Content..." Margin="10"/>
+                    </TabItem>
                 </TabControl>
+
+                <!-- Buttons -->
+
             </Grid>
         </Grid>
     </Grid>

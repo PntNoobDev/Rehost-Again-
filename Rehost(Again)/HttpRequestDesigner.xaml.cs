@@ -56,6 +56,14 @@ namespace Rehost_Again_
             TypeComboBox.ItemsSource = new List<string> { "UrlSegment" };
             TypeComboBox.SelectedIndex = 0;*/
         }
+        
+        private void AddAttachment_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void DeleteAttachment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
