@@ -253,6 +253,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AcceptResponseAsMode.cs" />
     <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="ForeachActivity.cs" />
     <Compile Include="ForeachActivityDesigner.xaml.cs">
@@ -267,6 +268,7 @@
     <Compile Include="ReadPdfActivityDesigner.xaml.cs">
       <DependentUpon>ReadPdfActivityDesigner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RequestMethod.cs" />
     <Compile Include="resfinder.cs" />
     <Compile Include="SMTP activity.cs" />
     <Compile Include="SmtpActivityDesigner.xaml.cs">
@@ -274,6 +276,7 @@
     </Compile>
     <Compile Include="SmtpSecurityMode.cs" />
     <Compile Include="TypeConverter.cs" />
+    <Compile Include="ViewModel.cs" />
     <Page Include="CustomActivityDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

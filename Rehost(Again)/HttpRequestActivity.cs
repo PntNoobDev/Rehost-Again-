@@ -13,19 +13,23 @@ namespace Rehost_Again_
         public InArgument<string> Body { get; set; }
         public OutArgument<string> Response { get; set; }
 
-        // Additional fields
+        // Các thuộc tính bổ sung
         public InArgument<string> ClientCertificate { get; set; }
         public InArgument<string> ClientCertificatePassword { get; set; }
         public InArgument<bool> EnableSSLVerification { get; set; }
-        
-        public InArgument<int> TimeOut { get; set; }
 
+        public InArgument<string> TimeOut { get; set; }
         public InArgument<bool> Preview { get; set; }
+        public InArgument<AccpectMode> AcceptMode { get; set; }
+        public InArgument<RequestMethod> RequestMethod { get; set; }
+
         protected override void Execute(CodeActivityContext context)
         {
+            
             var endpoint = Endpoint.Get(context);
             var method = Method.Get(context);
             var body = Body.Get(context);
+            var enableSSLVerification = EnableSSLVerification.Get(context);
 
             if (string.IsNullOrWhiteSpace(endpoint))
             {
@@ -34,9 +38,8 @@ namespace Rehost_Again_
 
             var clientCertificate = ClientCertificate.Get(context);
             var clientCertificatePassword = ClientCertificatePassword.Get(context);
-            var enableSSLVerification = EnableSSLVerification.Get(context);
 
-            // Use synchronous method to call async operation
+            // Sử dụng phương thức đồng bộ để gọi hoạt động bất đồng bộ
             var httpResponse = SendHttpRequest(endpoint, method, body, clientCertificate, clientCertificatePassword, enableSSLVerification).GetAwaiter().GetResult();
             Response.Set(context, httpResponse);
         }
@@ -47,14 +50,14 @@ namespace Rehost_Again_
             {
                 using (var handler = new HttpClientHandler())
                 {
-                    // Add client certificate if provided
+                    // Thêm chứng chỉ khách hàng nếu có
                     if (!string.IsNullOrEmpty(clientCertificate))
                     {
                         var certificate = new X509Certificate2(clientCertificate, clientCertificatePassword);
                         handler.ClientCertificates.Add(certificate);
                     }
 
-                    // Enable or disable SSL verification
+                    // Kích hoạt hoặc vô hiệu hóa xác minh SSL
                     handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
                     {
                         return enableSSLVerification || errors == System.Net.Security.SslPolicyErrors.None;
@@ -82,7 +85,7 @@ namespace Rehost_Again_
                                 throw new NotSupportedException($"HTTP method {method} is not supported.");
                         }
 
-                        response.EnsureSuccessStatusCode(); // Throw if not a success code.
+                        response.EnsureSuccessStatusCode(); // Ném ngoại lệ nếu mã trạng thái không thành công
 
                         return await response.Content.ReadAsStringAsync();
                     }
@@ -90,7 +93,7 @@ namespace Rehost_Again_
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as needed
+                // Ghi lại hoặc xử lý ngoại lệ nếu cần
                 throw new ApplicationException("An error occurred while sending the HTTP request.", ex);
             }
         }

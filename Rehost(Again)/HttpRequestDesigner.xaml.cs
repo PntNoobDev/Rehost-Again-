@@ -24,6 +24,7 @@ namespace Rehost_Again_
         public HttpRequestDesigner()
         {
             InitializeComponent();
+            DataContext = new HttpRequestViewModel();
         }
         private void Configure_Click(object sender, RoutedEventArgs e)
         {
@@ -65,5 +66,7 @@ namespace Rehost_Again_
         {
 
         }
+
+
     }
 }
