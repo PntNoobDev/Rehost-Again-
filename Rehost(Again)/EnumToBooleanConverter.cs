@@ -1,70 +1,62 @@
-﻿    using System.Globalization;
-    using System.Windows.Data;
-    using System.Activities.Presentation.Model;
-    using System.Activities.Expressions;
-    using System.Activities;
-    using System;
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
+using System.Activities;
+using System.Activities.Expressions;
 
-    namespace Rehost_Again_
+namespace Rehost_Again_
+{
+    public class EnumToBooleanConverter : IValueConverter
     {
-    
-        public class EnumToBooleanConverter : IValueConverter
+        // Chuyển đổi từ giá trị vào thành đối tượng boolean
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            if (value is InArgument<string> inArg)
             {
-                if (value is InArgument<string>)
+                Activity<string> expression = inArg.Expression;
+                if (expression is Literal<string> literal)
                 {
-                    Activity<string> expression = ((InArgument<string>)value).Expression;
-                    if (expression is Literal<string>)
-                    {
-                        return ((Literal<string>)expression).Value;
-                    }
-                }
-                var test = value as System.Activities.Presentation.Model.ModelItem;
-                if (test != null)
-                {
-                    if (test.ItemType == typeof(InArgument<string>))
-                    {
-                        var val = test.Properties["Expression"].Value;
-                        if (val != null)
-                        {
-                            var valstring = val.ToString();
-                            return valstring;
-                        }
-                        return val;
-                    }
-                }
-                return null;
-            }
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                if (value is string)
-                {
-                    return new InArgument<string>(new Literal<string>((string)value));
-                }
-                else
-                {
-                    return null;
+                    return literal.Value;
                 }
             }
 
-            private string _acceptResponseAs;
-            public string AcceptResponseAs
+            // Nếu giá trị không phải InArgument<string>, trả về giá trị null
+            return null;
+        }
+
+        // Chuyển đổi từ giá trị boolean về đối tượng InArgument<string>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string strValue)
             {
-                get => _acceptResponseAs;
-                set
-                {
-                    if (_acceptResponseAs != value)
-                    {
-                        _acceptResponseAs = value;
-                        OnPropertyChanged(nameof(AcceptResponseAs));
-                    }
-                }
+                return new InArgument<string>(new Literal<string>(strValue));
             }
 
-            private void OnPropertyChanged(string v)
+            // Nếu giá trị không phải string, trả về null
+            return null;
+        }
+
+        // Không cần thiết nếu không sử dụng INotifyPropertyChanged
+        // Nếu cần thiết, triển khai sự kiện PropertyChanged
+        private string _acceptResponseAs;
+        public string AcceptResponseAs
+        {
+            get => _acceptResponseAs;
+            set
             {
-                throw new NotImplementedException();
+                if (_acceptResponseAs != value)
+                {
+                    _acceptResponseAs = value;
+                    OnPropertyChanged(nameof(AcceptResponseAs));
+                }
             }
         }
+
+        // Triển khai hoặc loại bỏ nếu không sử dụng
+        private void OnPropertyChanged(string propertyName)
+        {
+            // Nếu cần thông báo thay đổi thuộc tính
+            // Implement PropertyChanged event logic here
+        }
     }
+}

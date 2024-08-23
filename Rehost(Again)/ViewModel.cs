@@ -1,136 +1,60 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace Rehost_Again_
+public class HttpRequestViewModel : INotifyPropertyChanged
 {
-    public class HttpRequestViewModel : INotifyPropertyChanged
+    private string endpoint;
+    private string preview;
+    private string timeOut;
+    private string clientCertificate;
+    private string clientCertificatePassword;
+    private string requestMethod;
+    private string acceptResponseAs;
+
+    public string Endpoint
     {
-        private string _endpoint;
-        private string _method;
-        private string _body;
-        private string _clientCertificate;
-        private string _clientCertificatePassword;
-        private bool _enableSSLVerification;
-        private string _timeOut;
-        private AccpectMode _acceptResponseAs;
+        get => endpoint;
+        set { endpoint = value; OnPropertyChanged(nameof(Endpoint)); }
+    }
 
-        // Endpoint
-        public string Endpoint
-        {
-            get => _endpoint;
-            set
-            {
-                if (_endpoint != value)
-                {
-                    _endpoint = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string Preview
+    {
+        get => preview;
+        set { preview = value; OnPropertyChanged(nameof(Preview)); }
+    }
 
-        // Method
-        public string Method
-        {
-            get => _method;
-            set
-            {
-                if (_method != value)
-                {
-                    _method = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string TimeOut
+    {
+        get => timeOut;
+        set { timeOut = value; OnPropertyChanged(nameof(TimeOut)); }
+    }
 
-        // Body
-        public string Body
-        {
-            get => _body;
-            set
-            {
-                if (_body != value)
-                {
-                    _body = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string ClientCertificate
+    {
+        get => clientCertificate;
+        set { clientCertificate = value; OnPropertyChanged(nameof(ClientCertificate)); }
+    }
 
-        // Client Certificate
-        public string ClientCertificate
-        {
-            get => _clientCertificate;
-            set
-            {
-                if (_clientCertificate != value)
-                {
-                    _clientCertificate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string ClientCertificatePassword
+    {
+        get => clientCertificatePassword;
+        set { clientCertificatePassword = value; OnPropertyChanged(nameof(ClientCertificatePassword)); }
+    }
 
-        // Client Certificate Password
-        public string ClientCertificatePassword
-        {
-            get => _clientCertificatePassword;
-            set
-            {
-                if (_clientCertificatePassword != value)
-                {
-                    _clientCertificatePassword = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string RequestMethod
+    {
+        get => requestMethod;
+        set { requestMethod = value; OnPropertyChanged(nameof(RequestMethod)); }
+    }
 
-        // Enable SSL Verification
-        public bool EnableSSLVerification
-        {
-            get => _enableSSLVerification;
-            set
-            {
-                if (_enableSSLVerification != value)
-                {
-                    _enableSSLVerification = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    public string AcceptResponseAs
+    {
+        get => acceptResponseAs;
+        set { acceptResponseAs = value; OnPropertyChanged(nameof(AcceptResponseAs)); }
+    }
 
-        // Timeout
-        public string TimeOut
-        {
-            get => _timeOut;
-            set
-            {
-                if (_timeOut != value)
-                {
-                    _timeOut = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        // Accept Response As
-        public AccpectMode AcceptResponseAs
-        {
-            get => _acceptResponseAs;
-            set
-            {
-                if (_acceptResponseAs != value)
-                {
-                    _acceptResponseAs = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

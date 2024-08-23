@@ -4,15 +4,17 @@
     xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      
     xmlns:local="clr-namespace:Rehost_Again_"
     xmlns:local1="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
-    Height="1850" Width="1039">
+                      Height="1850" Width="1039">
 
     <sap:ActivityDesigner.Resources>
         <!-- Khai báo các converter trong phần tài nguyên -->
+        
         <local1:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
         <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-
+       
     </sap:ActivityDesigner.Resources>
 
     <Grid Height="1452">
@@ -84,29 +86,33 @@
                                 <TextBlock Text="Client Certificate Password:" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                 <sapv:ExpressionTextBox x:Name="ClientCertificateTextBox1"
                                     OwnerActivity="{Binding Path=ModelItem}"
-                                    Expression="{Binding Path=ModelItem.ClientCertificate, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
+                                    Expression="{Binding Path=ModelItem.ClientCertificatePassword, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
                                     Width="220" Margin="5,0,0,0"/>
                             </StackPanel>
 
                             <!-- Request Method -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
                                 <TextBlock Text="Request Method:" VerticalAlignment="Center"/>
-                                <ComboBox Width="150" Margin="5,0,0,0">
-                                    <ComboBoxItem Content="GET" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=GET}"/>
-                                    <ComboBoxItem Content="POST" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=POST}"/>
-                                    <ComboBoxItem Content="PUT" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=PUT}"/>
-                                    <ComboBoxItem Content="DELETE" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DELETE}"/>
+                                <ComboBox x:Name="RequestMethodComboBox" Width="150" Margin="5,0,0,0">
+                                   
+                                        <ComboBoxItem Content="GET" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=GET}"/>
+                                        <ComboBoxItem Content="POST" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=POST}"/>
+                                        <ComboBoxItem Content="PUT" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=PUT}"/>
+                                        <ComboBoxItem Content="DELETE" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=DELETE}"/>
+                                  
                                 </ComboBox>
                             </StackPanel>
 
                             <!-- Accept Response As -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
                                 <TextBlock Text="Accept response as:" VerticalAlignment="Center"/>
-                                <ComboBox Width="150" Margin="5,0,0,0">
-                                    <ComboBoxItem Content="ANY" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ANY}"/>
-                                    <ComboBoxItem Content="JSON" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=JSON}"/>
-                                    <ComboBoxItem Content="XML" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=XML}"/>
-                                    <ComboBoxItem Content="CUSTOM" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CUSTOM}"/>
+                                <ComboBox x:Name="AcceptResponseAsComboBox" Width="150" Margin="5,0,0,0">
+                                  
+                                        <ComboBoxItem Content="ANY" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=ANY}"/>
+                                        <ComboBoxItem Content="JSON" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=JSON}"/>
+                                        <ComboBoxItem Content="XML" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=XML}"/>
+                                        <ComboBoxItem Content="CUSTOM" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=CUSTOM}"/>
+                                  
                                 </ComboBox>
                             </StackPanel>
 
@@ -127,27 +133,18 @@
                                         <StackPanel Orientation="Horizontal" Margin="0,5">
                                             <!-- Name -->
                                             <Grid Margin="5,0">
-                                                <sapv:ExpressionTextBox x:Name="NameTextBox"
-                                                    OwnerActivity="{Binding Path=ModelItem}"
-                                                    Expression="{Binding Path=ModelItem.ParameterName, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
-                                                    Width="120" Margin="0,0,5,0"/>
+                                                <TextBox x:Name="NameTextBox" Width="120" Margin="0,0,5,0"/>
                                                 <TextBlock Text="Name" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
                                             </Grid>
                                             <!-- File Path -->
                                             <Grid Margin="5,0">
-                                                <sapv:ExpressionTextBox x:Name="FilePathTextBox"
-                                                    OwnerActivity="{Binding Path=ModelItem}"
-                                                    Expression="{Binding Path=ModelItem.ParameterFilePath, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
-                                                    Width="120" Margin="0,0,5,0"/>
+                                                <TextBox x:Name="FilePathTextBox" Width="120" Margin="0,0,5,0"/>
                                                 <TextBlock Text="File Path" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
                                             </Grid>
                                             <!-- Type -->
                                             <Grid Margin="5,0">
-                                                <sapv:ExpressionTextBox x:Name="TypeTextBox"
-                                                    OwnerActivity="{Binding Path=ModelItem}"
-                                                    Expression="{Binding Path=ModelItem.ParameterType, Converter={StaticResource ArgumentToExpressionConverter}, Mode=TwoWay, ConverterParameter=In}"
-                                                    Width="120" Margin="0,0,5,0"/>
-                                                <TextBlock Text="Type" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                                <ComboBox x:Name="TypeComboBox" Width="120"/>
+                                                <TextBlock Text="Type" IsHitTestVisible="True" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
                                             </Grid>
                                         </StackPanel>
                                     </StackPanel>
@@ -156,19 +153,31 @@
 
                             <Expander Header="Attachments" Margin="10,10,0,5">
                                 <StackPanel Orientation="Vertical" Margin="5">
-                                    <!-- Buttons on Horizontal Row -->
-                                    <StackPanel Orientation="Horizontal" Margin="5">
-                                        <Button Content="Add Attachment" Width="150" Margin="5" Click="AddAttachment_Click"/>
-                                        <Button Content="Delete Attachment" Width="150" Margin="5" Click="DeleteAttachment_Click"/>
+                                    <!-- Buttons -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                        <Button Content="Add Attachment" Width="120" Margin="5" IsEnabled="True"/>
+                                        <Button Content="Delete Attachment" Width="120" Margin="5" IsEnabled="True"/>
                                     </StackPanel>
 
-                                    <!-- TextBoxes for Name, File Path, and Type -->
-                                    <StackPanel Orientation="Vertical" Margin="5">
-                                        <StackPanel Orientation="Horizontal" Margin="5">
-                                            <TextBox x:Name="NameTextBox1" Width="200" Margin="5" />
-                                            <TextBox x:Name="FilePathTextBox1" Width="300" Margin="5" />
-                                            <TextBox x:Name="TypeTextBox1" Width="100" Margin="5" Text="Attachment" IsReadOnly="True"/>
-                                        </StackPanel>
+                                    <!-- Input Fields -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <!-- Name -->
+                                        <Grid Margin="5,0">
+                                            <TextBox x:Name="NameTextBox2" Width="120" Margin="0,0,5,0"/>
+                                            <TextBlock Text="Name" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                        </Grid>
+                                        <!-- File Path -->
+                                        <Grid Margin="5,0">
+                                            <TextBox x:Name="FilePathText" Width="120" Margin="0,0,5,0"/>
+                                            <TextBlock Text="File Path" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                        </Grid>
+                                        <!-- Type -->
+                                        <Grid Margin="5,0">
+                                            <ComboBox x:Name="TypeComboBox1" Width="120">
+                                                <ComboBoxItem Content="Attachment" IsSelected="True"/>
+                                            </ComboBox>
+                                            <TextBlock Text="Type" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,-16,5,0" Foreground="Gray"/>
+                                        </Grid>
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
@@ -187,10 +196,12 @@
                             </StackPanel>
 
                             <!-- Buttons Preview and OK -->
+                            <!-- Buttons Preview and OK -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,0,5">
-                                <Button Content="Preview" Width="100" Margin="0,0,10,0"/>
-                                <Button Content="OK" Width="100"/>
+                                <Button Content="Preview" Width="100" Margin="0,0,10,0" Click="Preview_Click"/>
+                                <Button Content="OK" Width="100" Click="Ok_Click"/>
                             </StackPanel>
+
                         </StackPanel>
                     </TabItem>
 
