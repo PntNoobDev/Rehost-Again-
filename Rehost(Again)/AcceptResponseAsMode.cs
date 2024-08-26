@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rehost_Again_
 {
-    public enum AccpectMode
+    public enum AcceptResponseAsMode
     {
 
         Any,

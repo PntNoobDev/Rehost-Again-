@@ -64,8 +64,9 @@
                                 Width="640"/>
 
                             <!-- Enable SSL certificate verification -->
-                            <CheckBox Content="Enable SSL certificate verification" Margin="10,10,0,5"
-                                IsEnabled="{Binding Path=ModelItem.EnableSSLVerification, Mode=TwoWay}"/>
+                            <CheckBox Content="Enable SSL certificate verification" 
+                            IsChecked="{Binding Path = EnableSSLVerification, Mode=TwoWay}" />
+
 
                             <!-- Timeout -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
@@ -93,26 +94,19 @@
                             <!-- Request Method -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
                                 <TextBlock Text="Request Method:" VerticalAlignment="Center"/>
-                                <ComboBox x:Name="RequestMethodComboBox" Width="150" Margin="5,0,0,0">
-                                   
-                                        <ComboBoxItem Content="GET" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=GET}"/>
-                                        <ComboBoxItem Content="POST" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=POST}"/>
-                                        <ComboBoxItem Content="PUT" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=PUT}"/>
-                                        <ComboBoxItem Content="DELETE" IsSelected="{Binding Path=ModelItem.RequestMethod, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=DELETE}"/>
-                                  
+                                <ComboBox x:Name="RequestMethodComboBox" Width="150" Margin="5,0,0,0"
+                                 ItemsSource="{Binding Path=RequestMethods}"
+              SelectedValue="{Binding Path=ModelItem.RequestMethod, Mode=TwoWay}">
                                 </ComboBox>
                             </StackPanel>
+
 
                             <!-- Accept Response As -->
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,5">
                                 <TextBlock Text="Accept response as:" VerticalAlignment="Center"/>
-                                <ComboBox x:Name="AcceptResponseAsComboBox" Width="150" Margin="5,0,0,0">
-                                  
-                                        <ComboBoxItem Content="ANY" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=ANY}"/>
-                                        <ComboBoxItem Content="JSON" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=JSON}"/>
-                                        <ComboBoxItem Content="XML" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=XML}"/>
-                                        <ComboBoxItem Content="CUSTOM" IsSelected="{Binding Path=ModelItem.AcceptResponseAs, Converter={StaticResource EnumToBooleanConverter},Mode=TwoWay, ConverterParameter=CUSTOM}"/>
-                                  
+                                <ComboBox x:Name="AccpetResponseAsCombobox" Width="150" Margin="5,0,0,0"
+                                 ItemsSource="{Binding Path=AcceptResponseAsMode}"
+              SelectedValue="{Binding Path=ModelItem.AcceptResponseAsMode, Mode=TwoWay}">
                                 </ComboBox>
                             </StackPanel>
 
@@ -144,7 +138,7 @@
                                             <!-- Type -->
                                             <Grid Margin="5,0">
                                                 <ComboBox x:Name="TypeComboBox" Width="120"/>
-                                                <TextBlock Text="Type" IsHitTestVisible="True" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                                <TextBlock Text="" IsHitTestVisible="True" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
                                             </Grid>
                                         </StackPanel>
                                     </StackPanel>

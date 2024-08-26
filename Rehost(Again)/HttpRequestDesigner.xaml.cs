@@ -27,6 +27,7 @@ namespace Rehost_Again_
         {
             InitializeComponent();
             DataContext = new HttpRequestViewModel();
+            
         }
         private void Configure_Click(object sender, RoutedEventArgs e)
         {
@@ -79,7 +80,7 @@ namespace Rehost_Again_
             var clientCertificate = ClientCertificateTextBox.Expression.ToString();
             var clientCertificatePassword = ClientCertificateTextBox1.Expression.ToString();
             var requestMethod = ((ComboBoxItem)RequestMethodComboBox.SelectedItem)?.Content.ToString() ?? "Not Selected";
-            var acceptResponseAs = ((ComboBoxItem)AcceptResponseAsComboBox.SelectedItem)?.Content.ToString() ?? "Not Selected";
+            var acceptResponseAs = ((ComboBoxItem)AccpetResponseAsCombobox.SelectedItem)?.Content.ToString() ?? "Not Selected";
 
             // Display a preview of the request (this is a placeholder; adjust as needed)
             MessageBox.Show($"Preview:\nEndpoint: {endPoint}\nPreview URL: {previewUrl}\nTimeout: {timeout}\n" +
@@ -103,7 +104,7 @@ namespace Rehost_Again_
                 viewModel.ClientCertificate = ClientCertificateTextBox.Expression.ToString();
                 viewModel.ClientCertificatePassword = ClientCertificateTextBox1.Expression.ToString();
                 viewModel.RequestMethod = ((ComboBoxItem)RequestMethodComboBox.SelectedItem).Content.ToString();
-                viewModel.AcceptResponseAs = ((ComboBoxItem)AcceptResponseAsComboBox.SelectedItem).Content.ToString();
+                viewModel.AcceptResponseAs = ((ComboBoxItem)AccpetResponseAsCombobox.SelectedItem).Content.ToString();
 
                 // Perform any additional actions needed for saving or processing the data
 
@@ -111,7 +112,28 @@ namespace Rehost_Again_
                 this.Visibility = Visibility.Collapsed; // Or handle closing in another way
             }
         }
+        public ObservableCollection<RequestMethod> RequestMethods
+        {
+            get
+            {
+                return new ObservableCollection<RequestMethod>(Enum.GetValues(typeof(RequestMethod)).Cast<RequestMethod>());
+            }
+        }
 
+        public ObservableCollection<AcceptResponseAsMode> AcceptResponseAsMode
+        {
+            get
+            {
+                return new ObservableCollection<AcceptResponseAsMode>(Enum.GetValues(typeof(AcceptResponseAsMode)).Cast<AcceptResponseAsMode>());
+            }
+        }
+        /* public enum RequestMethod
+         {
+             GET,
+             POST,
+             PUT,
+             DELETE
+         }*/
 
 
     }

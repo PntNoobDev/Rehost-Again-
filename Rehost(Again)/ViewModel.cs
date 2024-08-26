@@ -9,50 +9,114 @@ public class HttpRequestViewModel : INotifyPropertyChanged
     private string clientCertificatePassword;
     private string requestMethod;
     private string acceptResponseAs;
+    private bool enableSSLVerification;
 
     public string Endpoint
     {
         get => endpoint;
-        set { endpoint = value; OnPropertyChanged(nameof(Endpoint)); }
+        set
+        {
+            if (endpoint != value)
+            {
+                endpoint = value;
+                OnPropertyChanged(nameof(Endpoint));
+            }
+        }
     }
 
     public string Preview
     {
         get => preview;
-        set { preview = value; OnPropertyChanged(nameof(Preview)); }
+        set
+        {
+            if (preview != value)
+            {
+                preview = value;
+                OnPropertyChanged(nameof(Preview));
+            }
+        }
     }
 
     public string TimeOut
     {
         get => timeOut;
-        set { timeOut = value; OnPropertyChanged(nameof(TimeOut)); }
+        set
+        {
+            if (timeOut != value)
+            {
+                timeOut = value;
+                OnPropertyChanged(nameof(TimeOut));
+            }
+        }
     }
 
     public string ClientCertificate
     {
         get => clientCertificate;
-        set { clientCertificate = value; OnPropertyChanged(nameof(ClientCertificate)); }
+        set
+        {
+            if (clientCertificate != value)
+            {
+                clientCertificate = value;
+                OnPropertyChanged(nameof(ClientCertificate));
+            }
+        }
     }
 
     public string ClientCertificatePassword
     {
         get => clientCertificatePassword;
-        set { clientCertificatePassword = value; OnPropertyChanged(nameof(ClientCertificatePassword)); }
+        set
+        {
+            if (clientCertificatePassword != value)
+            {
+                clientCertificatePassword = value;
+                OnPropertyChanged(nameof(ClientCertificatePassword));
+            }
+        }
     }
 
     public string RequestMethod
     {
         get => requestMethod;
-        set { requestMethod = value; OnPropertyChanged(nameof(RequestMethod)); }
+        set
+        {
+            if (requestMethod != value)
+            {
+                requestMethod = value;
+                OnPropertyChanged(nameof(RequestMethod));
+            }
+        }
     }
 
     public string AcceptResponseAs
     {
         get => acceptResponseAs;
-        set { acceptResponseAs = value; OnPropertyChanged(nameof(AcceptResponseAs)); }
+        set
+        {
+            if (acceptResponseAs != value)
+            {
+                acceptResponseAs = value;
+                OnPropertyChanged(nameof(AcceptResponseAs));
+            }
+        }
+    }
+
+    public bool EnableSSLVerification
+    {
+        get => enableSSLVerification;
+        set
+        {
+            if (enableSSLVerification != value)
+            {
+                enableSSLVerification = value;
+                OnPropertyChanged(nameof(EnableSSLVerification));
+            }
+        }
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
+
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

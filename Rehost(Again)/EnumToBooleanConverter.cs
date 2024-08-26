@@ -36,6 +36,32 @@ namespace Rehost_Again_
             return null;
         }
 
+        public object Convert1(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is InArgument<bool> inArg)
+            {
+                Activity<bool> expression = inArg.Expression;
+                if (expression is Literal<bool> literal)
+                {
+                    return literal.Value.ToString();
+                }
+            }
+            return null;
+        }
+
+        // Chuyển đổi từ chuỗi về đối tượng InArgument<bool>
+        public object ConvertBack1(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string strValue)
+            {
+                if (bool.TryParse(strValue, out bool boolValue))
+                {
+                    return new InArgument<bool>(new Literal<bool>(boolValue));
+                }
+            }
+            return null;
+        }
+
         // Không cần thiết nếu không sử dụng INotifyPropertyChanged
         // Nếu cần thiết, triển khai sự kiện PropertyChanged
         private string _acceptResponseAs;

@@ -12,6 +12,6 @@ namespace Rehost_Again_
         POST,
         PUT,
         DELETE,
-        SelectedItem,
+      
     }
 }

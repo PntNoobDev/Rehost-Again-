@@ -28,7 +28,7 @@ namespace Rehost_Again_
 
         public InArgument<bool> Preview { get; set; }
 
-        public AccpectMode AcceptMode { get; set; }
+        public AcceptResponseAsMode AcceptResponseAsMode { get; set; }
 
         public RequestMethod RequestMethod { get; set; }
 
@@ -46,7 +46,7 @@ namespace Rehost_Again_
             var body = Body.Get(context);
             var enableSSLVerification = EnableSSLVerification.Get(context);
             var addFilePath = AddFilePath.Get(context);
-            var accpectMode = AcceptMode.GetType();
+            var accpectMode = AcceptResponseAsMode.GetType();
             var requestMethod = RequestMethod.GetType();
             if (string.IsNullOrWhiteSpace(endpoint))
             {
@@ -55,9 +55,17 @@ namespace Rehost_Again_
 
             var clientCertificate = ClientCertificate.Get(context);
             var clientCertificatePassword = ClientCertificatePassword.Get(context);
+            if (enableSSLVerification)
+            {
+                
+                Console.WriteLine("SSL verification is enabled.");
+            }
+            else
+            {
+                Console.WriteLine("SSL verification is disabled.");
+            }
 
-            
-             
+
             // Sử dụng phương thức đồng bộ để gọi hoạt động bất đồng bộ
             var httpResponse = SendHttpRequest(endpoint, method, body, clientCertificate, clientCertificatePassword, enableSSLVerification,addParameter, addFilePath,accpectMode,requestMethod).GetAwaiter().GetResult();
             Response.Set(context, httpResponse);
