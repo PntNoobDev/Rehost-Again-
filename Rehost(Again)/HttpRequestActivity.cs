@@ -1,42 +1,89 @@
-﻿using Org.BouncyCastle.Asn1.X509.Qualified;
+﻿using iTextSharp.text;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using System;
 using System.Activities;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Serialization;
 
 namespace Rehost_Again_
 {
     public class HttpRequestActivity : CodeActivity
     {
+        [Category("Client CertificateAuthentication")]
+        [DisplayName("ClientCertificate")]
+        public InArgument<string> ClientCertificate { get; set; }
+        [Category("Client CertificateAuthentication")]
+        [DisplayName("ClientCertificatePassword")]
+        public InArgument<string> ClientCertificatePassword { get; set; }
+        [Category("Client CertificateAuthentication")]
+        [DisplayName("EnableSSLVerification")]
+        public InArgument<bool> EnableSSLVerification { get; set; } = new InArgument<bool>(false);
+        [Category("Common")]
+        [DisplayName("TimeOut")]
+        public InArgument<string> TimeOut { get; set; }
+        
+        [Category("Input")]
+        [DisplayName("Request Method")]
+        public RequestMethod RequestMethod { get; set; }
+        [Category("Input")]
+        [DisplayName("Accpect Format")]
+        public AcceptResponseAsMode AcceptResponseAsMode { get; set; }
+        [Category("Input")]
+        [DisplayName("Request URL")]
         public InArgument<string> Endpoint { get; set; }
 
         public InArgument<string> Method { get; set; }
-
+        [Category("Option")]
+        [DisplayName ("Body")]
         public InArgument<string> Body { get; set; }
+        [Category("Option")]
+        [DisplayName("Body_Format")]
+        public InArgument<string> Body_Format { get; set; } = new InArgument<string>("application/xml");
+        [Category("Option")]
+        [DisplayName("Cookie")]
+        public InArgument<byte> Cookie { get; set; }
+        [Category("Option")]
+        [DisplayName("File_Attachments")]
+        public InArgument<string> File_Attachments { get; set; }
+        [Category("Option")]
+        [DisplayName("File_Attachments")]
+        public InArgument<string> Filename_for_response_attachment { get; set; }
+        [Category("Option")]
+        [DisplayName("Headers")]
+        public InArgument<string>[] Headers { get; set; }
 
-        public OutArgument<string> Response { get; set; }
+        public OutArgument<string> Response { get; set; }   
 
         // Các thuộc tính bổ sung
-        public InArgument<string> ClientCertificate { get; set; }
-
-        public InArgument<string> ClientCertificatePassword { get; set; }
-
-        public InArgument<bool> EnableSSLVerification { get; set; } = new InArgument<bool>(false);
-
-        public InArgument<string> TimeOut { get; set; }
-
+     
         public InArgument<bool> Preview { get; set; }
-
-        public AcceptResponseAsMode AcceptResponseAsMode { get; set; }
-
-        public RequestMethod RequestMethod { get; set; }
-
+        [Category("Option")]
+        [DisplayName("Parameter")]
         public InArgument<string> AddParameter { get; set; }
-        
+        [Category("Option")]
+        [DisplayName("URL Segments")]
         public InArgument<string> AddFilePath { get; set; }
 
         public Type TypeParameter { get; set; }
+
+        public InArgument<string> Parameters { get; set; }
+        [Category("Output")]
+        [DisplayName("Header")]
+        public InArgument<string> Header { get; set; }
+        [Category("Output")]
+        [DisplayName("Response_attachment")]
+        public InArgument<string> Response_attachment {get; set;}
+        [Category("Output")]
+        [DisplayName("Response_contentType")]
+        public InArgument<string> Response_contentType { get; set; } = new InArgument<string>("ResponseContent");
+        [Category("Output")]
+        [DisplayName("Response_Status")]
+        public InArgument<string> Response_Status { get; set; } = new InArgument<string>("StatusCode");
+
         protected override void Execute(CodeActivityContext context)
         {
 
