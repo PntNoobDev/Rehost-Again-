@@ -22,7 +22,7 @@ namespace Rehost_Again_
 
         public InArgument<string> ClientCertificatePassword { get; set; }
 
-        public InArgument<bool> EnableSSLVerification { get; set; }
+        public InArgument<bool> EnableSSLVerification { get; set; } = new InArgument<bool>(false);
 
         public InArgument<string> TimeOut { get; set; }
 

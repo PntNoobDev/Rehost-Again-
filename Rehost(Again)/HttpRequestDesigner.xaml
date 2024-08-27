@@ -65,7 +65,7 @@
 
                             <!-- Enable SSL certificate verification -->
                             <CheckBox Content="Enable SSL certificate verification" 
-                            IsChecked="{Binding Path = EnableSSLVerification, Mode=TwoWay}" />
+          IsChecked="{Binding Path=EnableSSLVerification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
                             <!-- Timeout -->

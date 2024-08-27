@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 public class HttpRequestViewModel : INotifyPropertyChanged
 {
@@ -9,7 +10,7 @@ public class HttpRequestViewModel : INotifyPropertyChanged
     private string clientCertificatePassword;
     private string requestMethod;
     private string acceptResponseAs;
-    private bool enableSSLVerification;
+    private bool enableSSLVerification = false; 
 
     public string Endpoint
     {
@@ -114,6 +115,7 @@ public class HttpRequestViewModel : INotifyPropertyChanged
             }
         }
     }
+
 
     public event PropertyChangedEventHandler PropertyChanged;
 
