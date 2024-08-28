@@ -71,6 +71,20 @@ namespace Rehost_Again_
         {
 
         }
+        private void BrowseFile_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // Đặt giá trị cho ModelItem (thuộc tính File_Attachments)
+                ModelItem.Properties["File_Attachments"].SetValue(new InArgument<string>(openFileDialog.FileName));
+
+                // Hiển thị đường dẫn file đã chọn trong TextBox
+                FilePathText.Text = openFileDialog.FileName;
+            }
+        }
+
+
 
         private void Preview_Click(object sender, RoutedEventArgs e)
         {

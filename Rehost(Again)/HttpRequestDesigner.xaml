@@ -172,9 +172,14 @@
                                         </Grid>
                                         <!-- File Path -->
                                         <Grid Margin="5,0">
-                                            <TextBox x:Name="FilePathText" Width="120" Margin="0,0,5,0"/>
+                                            <TextBox x:Name="FilePathText" Width="120" Margin="0,0,5,0"
+                                            Text="{Binding Path=ModelItem.File_Attachments.Expression, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}}"/>
                                             <TextBlock Text="File Path" IsHitTestVisible="False" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Gray"/>
+                                            <Button Content="+" Width="20" Height="20" Margin="5,0,0,0" VerticalAlignment="Center" Click="BrowseFile_Click"/>
                                         </Grid>
+
+
+
                                         <!-- Type -->
                                         <Grid Margin="5,0">
                                             <ComboBox x:Name="TypeComboBox1" Width="120">

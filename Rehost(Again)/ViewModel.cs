@@ -10,8 +10,8 @@ public class HttpRequestViewModel : INotifyPropertyChanged
     private string clientCertificatePassword;
     private string requestMethod;
     private string acceptResponseAs;
-    private bool enableSSLVerification = false; 
-
+    private bool enableSSLVerification = false;
+    private string _filePath;
     public string Endpoint
     {
         get => endpoint;
@@ -37,7 +37,18 @@ public class HttpRequestViewModel : INotifyPropertyChanged
             }
         }
     }
-
+    public string FilePath
+    {
+        get { return _filePath; }
+        set
+        {
+            if (_filePath != value)
+            {
+                _filePath = value;
+                OnPropertyChanged(nameof(FilePath));
+            }
+        }
+    }
     public string TimeOut
     {
         get => timeOut;
