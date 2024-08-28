@@ -9,18 +9,30 @@ namespace Rehost_Again_
     public class EnumToBooleanConverter : IValueConverter
     {
         // Chuyển đổi từ giá trị vào thành đối tượng boolean
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is InArgument<string> inArg)
+            if (value is InArgument<bool>)
             {
-                Activity<string> expression = inArg.Expression;
-                if (expression is Literal<string> literal)
+                Activity<bool> expression = ((InArgument<bool>)value).Expression;
+                if (expression is Literal<bool>)
                 {
-                    return literal.Value;
+                    return ((Literal<bool>)expression).Value;
                 }
             }
-
-            // Nếu giá trị không phải InArgument<string>, trả về giá trị null
+            var test = value as System.Activities.Presentation.Model.ModelItem;
+            if (test != null)
+            {
+                if (test.ItemType == typeof(InArgument<bool>))
+                {
+                    var val = test.Properties["Expression"].Value;
+                    if (val != null)
+                    {
+                        var valstring = val.ToString();
+                        return bool.Parse(valstring);
+                    }
+                    return val;
+                }
+            }
             return null;
         }
 
@@ -36,30 +48,42 @@ namespace Rehost_Again_
             return null;
         }
 
-        public object Convert1(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert1(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is InArgument<bool> inArg)
+            if (value is InArgument<bool>)
             {
-                Activity<bool> expression = inArg.Expression;
-                if (expression is Literal<bool> literal)
+                Activity<bool> expression = ((InArgument<bool>)value).Expression;
+                if (expression is Literal<bool>)
                 {
-                    return literal.Value.ToString();
+                    return ((Literal<bool>)expression).Value;
+                }
+            }
+            var test = value as System.Activities.Presentation.Model.ModelItem;
+            if (test != null)
+            {
+                if (test.ItemType == typeof(InArgument<bool>))
+                {
+                    var val = test.Properties["Expression"].Value;
+                    if (val != null)
+                    {
+                        var valstring = val.ToString();
+                        return bool.Parse(valstring);
+                    }
+                    return val;
                 }
             }
             return null;
         }
-
-        // Chuyển đổi từ chuỗi về đối tượng InArgument<bool>
-        public object ConvertBack1(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack1(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is string strValue)
+            if (value is bool)
             {
-                if (bool.TryParse(strValue, out bool boolValue))
-                {
-                    return new InArgument<bool>(new Literal<bool>(boolValue));
-                }
+                return new InArgument<bool>(new Literal<bool>((bool)value));
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
 
         // Không cần thiết nếu không sử dụng INotifyPropertyChanged

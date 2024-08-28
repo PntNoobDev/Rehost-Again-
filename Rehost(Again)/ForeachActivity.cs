@@ -17,7 +17,7 @@ namespace Rehost_Again_
         public ActivityAction<T> Body { get; set; }
         public InArgument<T> Item { get; set; }
         public InArgument<string> ConditionDescription { get; set; }
-        public string Type { get; set; } // To store the selected type as a string or another suitable type
+        public string Type { get; set; }
         public Type ItemType { get; set; } = typeof(T);
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {

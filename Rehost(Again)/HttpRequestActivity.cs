@@ -3,6 +3,7 @@ using Org.BouncyCastle.Asn1.X509.Qualified;
 using System;
 using System.Activities;
 using System.ComponentModel;
+using System.Drawing;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Xml.Serialization;
 
 namespace Rehost_Again_
 {
+    [ToolboxBitmap(typeof(resfinder), "Resources.smtp.png")]
     public class HttpRequestActivity : CodeActivity
     {
         [Category("Client CertificateAuthentication")]
@@ -21,7 +23,8 @@ namespace Rehost_Again_
         public InArgument<string> ClientCertificatePassword { get; set; }
         [Category("Client CertificateAuthentication")]
         [DisplayName("EnableSSLVerification")]
-        public InArgument<bool> EnableSSLVerification { get; set; } = new InArgument<bool>(false);
+        public InArgument<bool> EnableSSLVerification { get; set; } = false;
+           
         [Category("Common")]
         [DisplayName("TimeOut")]
         public InArgument<string> TimeOut { get; set; }

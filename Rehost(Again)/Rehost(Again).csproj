@@ -254,6 +254,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AcceptResponseAsMode.cs" />
+    <Compile Include="ConvertBoolCheckbox.cs" />
     <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="ForeachActivity.cs" />
     <Compile Include="ForeachActivityDesigner.xaml.cs">

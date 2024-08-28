@@ -7,16 +7,25 @@
                       
     xmlns:local="clr-namespace:Rehost_Again_"
     xmlns:local1="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
-                      Height="1850" Width="1039">
+           
+    Height="1850" Width="1039">
 
     <sap:ActivityDesigner.Resources>
         <!-- Khai báo các converter trong phần tài nguyên -->
-        
+       
         <local1:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
         <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-       
+        <local:InArgumentBoolConverter x:Key="ConvertBoolCheckbox" />
     </sap:ActivityDesigner.Resources>
 
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing Rect="0,0,16,16" ImageSource="pack://application:,,,/Rehost(Again);component/Resources/activities/smtp.png"/>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
+    
     <Grid Height="1452">
         <Grid.RowDefinitions>
             <RowDefinition Height="719*"/>
@@ -64,8 +73,9 @@
                                 Width="640"/>
 
                             <!-- Enable SSL certificate verification -->
-                            <CheckBox Content="Enable SSL certificate verification" 
-          IsChecked="{Binding Path=EnableSSLVerification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Content="Enable SSL certificate verification" IsThreeState="False"
+                            IsChecked="{Binding Path=ModelItem.EnableSSLVerification, Mode=TwoWay, Converter={StaticResource ConvertBoolCheckbox}}" />
+                            
 
 
                             <!-- Timeout -->
